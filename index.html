@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big T's Bakery — Fresh. Made to Order. Made with Love.</title>
+<meta name="description" content="Big T's Bakery: fresh, made-to-order gourmet cookies and seasonal desserts. Customise your Black & White cookies. Local pickup and delivery.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Kaushan+Script&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EDIT ZONE 1 — brand colours live here. Change once, apply everywhere.
+   ============================================================ */
+:root{
+  --cream:#F6ECD6;
+  --milk:#FBF6EC;
+  --choc:#33200F;
+  --choc-2:#4A2E17;
+  --brown:#6B4226;
+  --cookie:#C88A4A;
+  --gold:#E8A93A;
+  --gold-deep:#CE8A1E;
+  --berry:#C23B2B;
+  --ink:#2A1B0E;
+  --line:#E4D3AE;
+  --shadow:rgba(51,32,15,.16);
+
+  --font-display:'Baloo 2', system-ui, sans-serif;
+  --font-script:'Kaushan Script', cursive;
+  --font-body:'Nunito', system-ui, sans-serif;
+
+  --maxw:1120px;
+  --radius:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);font-weight:800}
+:focus-visible{outline:3px solid var(--berry);outline-offset:2px;border-radius:4px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.eyebrow{
+  font-family:var(--font-body);font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;font-size:.72rem;color:var(--gold-deep);
+}
+.script{font-family:var(--font-script);font-weight:400}
+
+/* ---- buttons ---- */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-display);font-weight:700;font-size:1rem;
+  padding:.8rem 1.5rem;border-radius:999px;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-gold{background:var(--gold);color:var(--choc);box-shadow:0 6px 0 var(--gold-deep)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--gold-deep)}
+.btn-gold:active{transform:translateY(3px);box-shadow:0 3px 0 var(--gold-deep)}
+.btn-ghost{background:transparent;color:var(--cream);border:2px solid rgba(246,236,214,.5)}
+.btn-ghost:hover{background:rgba(246,236,214,.12)}
+.btn-brown{background:var(--brown);color:var(--cream);box-shadow:0 5px 0 #4a2c18}
+.btn-brown:hover{transform:translateY(-2px);box-shadow:0 7px 0 #4a2c18}
+.btn-brown:active{transform:translateY(2px);box-shadow:0 3px 0 #4a2c18}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+
+/* ============================================================ NAV */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(51,32,15,.92);backdrop-filter:blur(8px);
+  border-bottom:2px solid rgba(232,169,58,.35);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:.55rem;color:var(--cream)}
+.brand .mark{width:34px;height:34px;flex:none}
+.brand b{font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:.01em}
+.brand b span{color:var(--gold)}
+.nav-links{display:flex;gap:1.4rem;align-items:center}
+.nav-links a{color:var(--cream);font-weight:700;font-size:.95rem;opacity:.85}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-order{padding:.5rem 1.1rem;font-size:.92rem}
+.nav-toggle{display:none;background:transparent;color:var(--cream);font-size:1.5rem}
+@media(max-width:820px){
+  .nav-links{
+    position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--choc);border-bottom:2px solid var(--gold);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .nav-links.open{max-height:340px}
+  .nav-links a{padding:.9rem 22px;width:100%;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links .nav-order{margin:.8rem 22px}
+  .nav-toggle{display:block}
+}
+
+/* ============================================================ HERO */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 78% 8%, rgba(232,169,58,.34), transparent 55%),
+    radial-gradient(100% 80% at 12% 100%, rgba(194,59,43,.22), transparent 60%),
+    linear-gradient(160deg,var(--choc-2),var(--choc));
+  color:var(--cream);
+  padding:72px 0 120px;
+}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero-eyebrow{color:var(--gold);letter-spacing:.2em}
+.hero h1{
+  color:var(--cream);font-size:clamp(2.6rem,6vw,4.6rem);margin:.4rem 0 .2rem;
+}
+.hero h1 .l3{color:var(--gold);position:relative;display:inline-block}
+.hero h1 .l3::after{
+  content:"";position:absolute;left:0;right:6%;bottom:.02em;height:.09em;
+  background:var(--berry);border-radius:4px;
+}
+.hero .lede{font-size:1.12rem;max-width:44ch;opacity:.92;margin:.5rem 0 1.6rem}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.hero-slogan{margin-top:1.6rem;font-family:var(--font-script);color:var(--gold);font-size:1.5rem}
+.hero-slogan .heart{color:var(--berry)}
+
+.cookie-stack{position:relative;height:340px;display:flex;align-items:center;justify-content:center}
+.cookie-stack svg{position:absolute;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.c-a{width:200px;transform:translate(-70px,-30px) rotate(-12deg)}
+.c-b{width:210px;transform:translate(60px,10px) rotate(8deg)}
+.c-c{width:180px;transform:translate(-10px,90px) rotate(-3deg)}
+
+/* wave divider */
+.wave{display:block;width:100%;height:60px;margin-top:-60px;position:relative;z-index:2}
+
+/* ============================================================ BADGES */
+.badges{background:var(--milk);padding:26px 0;border-bottom:2px dashed var(--line)}
+.badge-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px}
+.badge{display:flex;align-items:center;gap:.55rem;font-weight:800;color:var(--brown);font-size:.9rem}
+.badge svg{width:26px;height:26px;flex:none;color:var(--gold-deep)}
+
+/* ============================================================ SECTION SHELL */
+.section{padding:76px 0}
+.section-head{text-align:center;max-width:640px;margin:0 auto 44px}
+.section-head h2{font-size:clamp(2rem,4.5vw,2.9rem);margin:.3rem 0 .6rem}
+.section-head p{color:var(--brown);font-size:1.05rem}
+
+/* ============================================================ SIGNATURE COOKIES */
+.sig{background:var(--cream)}
+.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sig-card{
+  background:var(--milk);border:2px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px 28px;text-align:center;transition:transform .18s ease, box-shadow .18s ease;
+}
+.sig-card:hover{transform:translateY(-5px);box-shadow:0 16px 30px var(--shadow)}
+.sig-card .thumb{width:120px;height:120px;margin:0 auto 14px}
+.sig-card h3{font-size:1.5rem;margin-bottom:.35rem}
+.sig-card.birthday h3{color:var(--berry)}
+.sig-card p{color:var(--brown);font-size:.98rem;min-height:3em}
+.sig-card .tag{
+  display:inline-block;margin-top:12px;font-weight:800;font-size:.78rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--gold-deep);background:rgba(232,169,58,.16);
+  padding:.3rem .7rem;border-radius:999px;
+}
+
+/* ============================================================ ORDER (the signature block) */
+.order{background:linear-gradient(180deg,var(--milk),var(--cream))}
+.order-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:30px;align-items:start}
+.menu-panel{display:flex;flex-direction:column;gap:14px}
+.menu-item{
+  display:flex;align-items:center;gap:16px;background:var(--milk);
+  border:2px solid var(--line);border-radius:14px;padding:14px 16px;
+}
+.menu-item .mi-thumb{width:58px;height:58px;flex:none}
+.menu-item .mi-body{flex:1;min-width:0}
+.menu-item .mi-body h4{font-size:1.12rem}
+.menu-item .mi-body p{font-size:.86rem;color:var(--brown);margin-top:2px}
+.menu-item .mi-price{font-weight:800;color:var(--choc);white-space:nowrap;font-family:var(--font-display)}
+.stepper{display:flex;align-items:center;gap:8px}
+.stepper button{
+  width:34px;height:34px;border-radius:9px;background:var(--brown);color:var(--cream);
+  font-size:1.3rem;font-weight:700;line-height:1;display:grid;place-items:center;
+}
+.stepper button:hover{background:var(--choc)}
+.stepper .qty{min-width:22px;text-align:center;font-weight:800;font-family:var(--font-display)}
+.bundle-hint{font-size:.8rem;color:var(--gold-deep);font-weight:700;text-align:center;margin-top:2px}
+
+.custom-row{margin-top:10px;padding-top:12px;border-top:1px dashed var(--line);display:none}
+.custom-row.show{display:block}
+.custom-row label{font-weight:700;font-size:.85rem;display:block;margin-bottom:6px;color:var(--choc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.chip{
+  font-size:.78rem;font-weight:700;padding:.28rem .6rem;border-radius:999px;
+  background:var(--cream);border:1.5px solid var(--line);color:var(--brown);
+}
+.chip:hover{border-color:var(--gold);color:var(--choc)}
+
+/* ---- ticket / cart ---- */
+.ticket{
+  position:sticky;top:82px;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 27px, rgba(107,66,38,.06) 27px 28px),
+    var(--milk);
+  border:2px solid var(--brown);border-radius:16px;overflow:hidden;
+  box-shadow:0 12px 30px var(--shadow);
+}
+.ticket-head{background:var(--brown);color:var(--cream);padding:14px 18px;display:flex;align-items:center;gap:.6rem}
+.ticket-head svg{width:22px;height:22px}
+.ticket-head h3{color:var(--cream);font-size:1.25rem}
+.ticket-body{padding:16px 18px}
+.cart-empty{color:var(--brown);text-align:center;padding:22px 6px;font-weight:600}
+.cart-line{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.92rem}
+.cart-line .cl-name{font-weight:700}
+.cart-line .cl-note{display:block;font-size:.78rem;color:var(--gold-deep);font-weight:700}
+.cart-line .cl-qty{color:var(--brown);font-weight:600}
+.cart-totals{margin-top:12px;font-size:.95rem}
+.cart-totals .row{display:flex;justify-content:space-between;padding:3px 0}
+.cart-totals .grand{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--choc);border-top:2px solid var(--brown);margin-top:8px;padding-top:8px}
+.todo{color:var(--berry);font-weight:800}
+
+.fulfil{margin-top:16px}
+.fulfil h4{font-size:1rem;margin-bottom:8px}
+.seg{display:flex;background:var(--cream);border:2px solid var(--line);border-radius:999px;padding:3px}
+.seg button{flex:1;padding:.5rem;border-radius:999px;font-weight:800;color:var(--brown);background:transparent;font-family:var(--font-display)}
+.seg button.active{background:var(--gold);color:var(--choc)}
+.field{margin-top:12px}
+.field label{display:block;font-weight:700;font-size:.85rem;margin-bottom:5px}
+.field input,.field textarea,.field select{
+  width:100%;padding:.6rem .7rem;border:2px solid var(--line);border-radius:10px;
+  font-family:var(--font-body);font-size:.95rem;background:#fff;color:var(--ink);
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);outline:none}
+.hint{font-size:.78rem;color:var(--brown);margin-top:4px}
+.ticket-actions{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.ticket-actions .btn{justify-content:center;width:100%}
+
+/* pay panel */
+.pay{margin-top:14px;padding:14px;background:var(--cream);border:2px dashed var(--gold);border-radius:12px;display:none}
+.pay.show{display:block}
+.pay h4{font-size:1.05rem;margin-bottom:6px}
+.pay p{font-size:.88rem;color:var(--brown)}
+.pay .pp-id{font-family:var(--font-display);font-weight:800;color:var(--choc);font-size:1.1rem;margin:6px 0}
+.pay .qr{width:150px;height:150px;margin:10px auto;border:2px solid var(--line);border-radius:10px;display:grid;place-items:center;background:#fff;color:var(--brown);font-size:.75rem;text-align:center;padding:8px}
+
+/* ============================================================ SEASONAL */
+.seasonal{background:var(--choc);color:var(--cream)}
+.seasonal .section-head h2{color:var(--cream)}
+.seasonal .section-head p{color:rgba(246,236,214,.8)}
+.season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.season-card{background:var(--choc-2);border:2px solid rgba(232,169,58,.28);border-radius:14px;padding:20px 16px;text-align:center}
+.season-card .s-ico{width:56px;height:56px;margin:0 auto 10px}
+.season-card h4{color:var(--cream);font-size:1.15rem}
+.season-card .s-price{color:var(--gold);font-weight:800;font-family:var(--font-display);margin-top:6px}
+.season-note{text-align:center;margin-top:26px;font-family:var(--font-script);color:var(--gold);font-size:1.3rem}
+
+/* ============================================================ STEPS */
+.steps{background:var(--milk)}
+.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{text-align:center;padding:12px}
+.step .num{
+  width:56px;height:56px;margin:0 auto 14px;border-radius:50%;
+  background:var(--gold);color:var(--choc);display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:800;font-size:1.6rem;box-shadow:0 5px 0 var(--gold-deep);
+}
+.step h4{font-size:1.25rem;margin-bottom:.3rem}
+.step p{color:var(--brown)}
+
+/* ============================================================ STORY */
+.story{background:var(--cream)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.story-copy h2{font-size:clamp(2rem,4vw,2.7rem);margin-bottom:1rem}
+.story-copy p{color:var(--ink);margin-bottom:1rem;font-size:1.05rem}
+.story-art{background:var(--choc);border-radius:var(--radius);min-height:300px;display:grid;place-items:center;color:var(--cream);text-align:center;padding:30px;border:3px solid var(--gold)}
+.story-art .script{font-size:2rem;color:var(--gold)}
+
+/* ============================================================ CONTACT / FAQ */
+.contact{background:var(--brown);color:var(--cream)}
+.contact .section-head h2{color:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:36px;align-items:start}
+.info-block h4{color:var(--gold);font-size:1.1rem;margin-bottom:.3rem;margin-top:1.2rem}
+.info-block h4:first-child{margin-top:0}
+.info-block p{color:rgba(246,236,214,.9)}
+.socials{display:flex;gap:12px;margin-top:16px}
+.social-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(246,236,214,.12);padding:.6rem 1rem;border-radius:999px;font-weight:800;font-size:.9rem}
+.social-btn:hover{background:var(--gold);color:var(--choc)}
+.faq details{background:var(--choc-2);border:2px solid rgba(232,169,58,.25);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq summary{padding:14px 18px;font-family:var(--font-display);font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:1.4rem;font-weight:700}
+.faq details[open] summary::after{content:"–"}
+.faq .ans{padding:0 18px 16px;color:rgba(246,236,214,.88)}
+
+/* ============================================================ FOOTER */
+.footer{background:var(--choc);color:rgba(246,236,214,.8);padding:40px 0 28px;text-align:center}
+.footer .brand{justify-content:center;margin-bottom:10px}
+.footer .fslogan{font-family:var(--font-script);color:var(--gold);font-size:1.3rem;margin:6px 0 14px}
+.footer small{display:block;opacity:.6;margin-top:14px}
+
+/* ---- toast ---- */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120%);
+  background:var(--choc);color:var(--cream);padding:.9rem 1.4rem;border-radius:999px;
+  font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.3);z-index:100;transition:transform .3s ease;
+  border:2px solid var(--gold);max-width:90vw;text-align:center;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ============================================================ RESPONSIVE */
+@media(max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;text-align:center}
+  .hero-cta{justify-content:center}
+  .hero .lede{margin-left:auto;margin-right:auto}
+  .cookie-stack{height:260px;margin-top:10px}
+  .order-grid{grid-template-columns:1fr}
+  .ticket{position:static}
+  .story-grid,.contact-grid{grid-template-columns:1fr}
+  .sig-grid{grid-template-columns:1fr}
+  .season-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .season-grid{grid-template-columns:1fr}
+  .step-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="Big T's Bakery home">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#E8A93A" stroke="#33200F" stroke-width="3"/><circle cx="14" cy="16" r="2.4" fill="#33200F"/><circle cx="25" cy="14" r="2.1" fill="#33200F"/><circle cx="27" cy="25" r="2.4" fill="#33200F"/><circle cx="15" cy="26" r="2" fill="#33200F"/><circle cx="21" cy="21" r="1.8" fill="#33200F"/></svg>
+      <b>Big <span>T's</span> Bakery</b>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleNav(this)">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#signatures">Cookies</a>
+      <a href="#order">Order</a>
+      <a href="#seasonal">Seasonal</a>
+      <a href="#story">Our Story</a>
+      <a href="#contact">Contact</a>
+      <a href="#order" class="btn btn-gold nav-order">Start your order</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow hero-eyebrow">Fresh · Made to order · Made with love</span>
+      <h1>Big Cookies.<br>Big Smiles.<br><span class="l3">Big T's!</span></h1>
+      <p class="lede">Small-batch gourmet cookies and seasonal desserts, baked fresh to order and made just for you. Support local. Support young entrepreneurs.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn btn-gold">Start your order</a>
+        <a href="#signatures" class="btn btn-ghost">See the cookies</a>
+      </div>
+      <p class="hero-slogan">T-T-T-T'Soot! <span class="heart">♥</span></p>
+    </div>
+    <div class="cookie-stack" aria-hidden="true">
+      <svg class="c-a" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><circle cx="50" cy="50" r="44" fill="url(#tex)"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="66" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/><circle cx="52" cy="50" r="4"/><circle cx="30" cy="52" r="3.6"/></g></svg>
+      <svg class="c-b" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="#FBF6EC"/><g><rect x="34" y="30" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 37 31)"/><rect x="58" y="34" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(-30 61 35)"/><rect x="46" y="44" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(50 49 45)"/><rect x="60" y="58" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(-15 63 59)"/><rect x="36" y="60" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(35 39 61)"/><rect x="50" y="62" width="6" height="2.6" rx="1.3" fill="#6BbE5b" transform="rotate(-40 53 63)"/></g></svg>
+      <svg class="c-c" viewBox="0 0 100 100"><defs><clipPath id="half"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#half)"/></svg>
+    </div>
+  </div>
+</header>
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 C240,70 480,0 720,25 C960,50 1200,10 1440,34 L1440,60 L0,60 Z" fill="#FBF6EC"/></svg>
+
+<!-- ============================ BADGES ============================ -->
+<section class="badges" aria-label="Why choose us">
+  <div class="wrap badge-row">
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="14" cy="11" r="1" fill="currentColor"/><circle cx="11" cy="15" r="1" fill="currentColor"/></svg>Gourmet cookies</span>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8c0 4 3 6 7 6M19 8c0 4-3 6-7 6"/></svg>Fresh ingredients</span>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9C.5 8 2.5 4 6 4c2 0 3.2 1.2 4 2.4C10.8 5.2 12 4 14 4c3.5 0 5.5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>Made with love</span>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l9-5 9 5-9 5-9-5zM3 8v8l9 5 9-5V8"/></svg>Made to order</span>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5M15 20c0-2 1-3.5 3-4"/></svg>Support local</span>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h11v8H2zM13 10h4l3 3v2h-7z"/><circle cx="6" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>Pickup &amp; delivery</span>
+  </div>
+</section>
+
+<!-- ============================ SIGNATURE COOKIES ============================ -->
+<section class="section sig" id="signatures">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our signatures</span>
+      <h2>Cookies worth the wait</h2>
+      <p>Three favourites, baked fresh the moment you order. Never pre-made, never sitting on a shelf.</p>
+    </div>
+    <div class="sig-grid">
+      <div class="sig-card">
+        <svg class="thumb" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="66" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/><circle cx="52" cy="50" r="4"/></g></svg>
+        <h3>Chocolate Chip</h3>
+        <p>Classic, chewy, and loaded with rich chocolate chips.</p>
+        <span class="tag">Year-round</span>
+      </div>
+      <div class="sig-card birthday">
+        <svg class="thumb" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="32" fill="#FBF6EC"/><g><rect x="36" y="32" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 39 33)"/><rect x="58" y="36" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(-30 61 37)"/><rect x="46" y="46" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(50 49 47)"/><rect x="58" y="58" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(-15 61 59)"/><rect x="38" y="60" width="6" height="2.6" rx="1.3" fill="#6BbE5b" transform="rotate(35 41 61)"/></g></svg>
+        <h3>Birthday Cake</h3>
+        <p>Soft, sweet, and packed with sprinkles for every celebration.</p>
+        <span class="tag">Year-round</span>
+      </div>
+      <div class="sig-card">
+        <svg class="thumb" viewBox="0 0 100 100"><defs><clipPath id="half2"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#half2)"/></svg>
+        <h3>Black &amp; White</h3>
+        <p>A timeless favourite. Now with custom icing colours, just for you.</p>
+        <span class="tag">Customisable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ORDER ============================ -->
+<section class="section order" id="order">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Made to order, just for you</span>
+      <h2>Build your box</h2>
+      <p>Pick your cookies, customise, then choose your time and place. We bake it fresh and hand it over on the weekend.</p>
+    </div>
+    <div class="order-grid">
+
+      <!-- MENU -->
+      <div class="menu-panel" id="menuPanel"><!-- items injected by JS --></div>
+
+      <!-- TICKET / CART -->
+      <div class="ticket" aria-label="Your order">
+        <div class="ticket-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18l-2 13H5L3 6zM3 6l-1-3M8 10v5M16 10v5"/></svg>
+          <h3>Your order</h3>
+        </div>
+        <div class="ticket-body">
+          <div id="cartLines"><p class="cart-empty">Your box is empty. Add some cookies!</p></div>
+
+          <div class="cart-totals" id="cartTotals" style="display:none">
+            <div class="row"><span>Cookies</span><span id="subtotal">฿0</span></div>
+            <div class="row"><span id="deliveryLabel">Delivery</span><span id="deliveryVal">—</span></div>
+            <div class="row grand"><span>Total</span><span id="grandTotal">฿0</span></div>
+          </div>
+
+          <div class="fulfil" id="fulfilBox" style="display:none">
+            <h4>How would you like it?</h4>
+            <div class="seg" role="tablist">
+              <button id="segPickup" class="active" onclick="setFulfil('pickup')">Pickup</button>
+              <button id="segDelivery" onclick="setFulfil('delivery')">Delivery</button>
+            </div>
+
+            <div class="field">
+              <label for="fDate">Weekend date (Sat or Sun)</label>
+              <input type="date" id="fDate" onchange="renderCart()">
+              <p class="hint" id="dateHint">Orders taken Mon–Fri, handed over Sat–Sun.</p>
+            </div>
+            <div class="field">
+              <label for="fName">Your name</label>
+              <input type="text" id="fName" placeholder="Name for the order">
+            </div>
+            <div class="field">
+              <label for="fPhone">Phone or LINE ID</label>
+              <input type="text" id="fPhone" placeholder="So we can confirm your order">
+            </div>
+            <div class="field" id="addrField" style="display:none">
+              <label for="fAddr">Delivery address</label>
+              <textarea id="fAddr" rows="2" placeholder="Where should we deliver?"></textarea>
+            </div>
+            <div class="field">
+              <label for="fNotes">Notes (optional)</label>
+              <textarea id="fNotes" rows="2" placeholder="Anything else we should know?"></textarea>
+            </div>
+          </div>
+
+          <div class="ticket-actions" id="actions" style="display:none">
+            <button class="btn btn-gold" onclick="reviewOrder()">Review &amp; get payment details</button>
+          </div>
+
+          <!-- PAYMENT -->
+          <div class="pay" id="payBox">
+            <h4>Almost done — pay by PromptPay</h4>
+            <p>Transfer the total below, then send your slip to confirm. We start baking once payment lands.</p>
+            <div class="pp-id" id="ppId"></div>
+            <div class="qr" id="ppQr">Add your PromptPay QR image here</div>
+            <p><b>Total to send: <span id="payTotal">฿0</span></b></p>
+            <div class="ticket-actions">
+              <button class="btn btn-brown" onclick="copyOrder()">Copy my order</button>
+              <button class="btn btn-gold" onclick="sendLine()">Send order on LINE</button>
+            </div>
+            <p class="hint">Copy your order, message us on LINE, paste it, and attach your transfer slip.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SEASONAL ============================ -->
+<section class="section seasonal" id="seasonal">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--gold)">Limited time only</span>
+      <h2>Seasonal favourites</h2>
+      <p>Made for every season, baked fresh when they're in. Follow us so you don't miss a drop.</p>
+    </div>
+    <div class="season-grid" id="seasonGrid"><!-- injected by JS --></div>
+    <p class="season-note">Seasonal specials · made fresh · gone before you know it ♥</p>
+  </div>
+</section>
+
+<!-- ============================ STEPS ============================ -->
+<section class="section steps">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps to fresh cookies</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step"><div class="num">1</div><h4>Choose your goodies</h4><p>Browse the menu and build your box.</p></div>
+      <div class="step"><div class="num">2</div><h4>Customise</h4><p>Add your icing colours and any special requests.</p></div>
+      <div class="step"><div class="num">3</div><h4>Pick your time &amp; place</h4><p>Choose pickup or delivery, pay by PromptPay, done.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ STORY ============================ -->
+<section class="section story" id="story">
+  <div class="wrap story-grid">
+    <div class="story-copy">
+      <span class="eyebrow">Our story</span>
+      <h2>Built by young hands, one cookie at a time</h2>
+      <p>Big T's Bakery started with a simple idea: make incredible desserts while building something of our own.</p>
+      <p>As a collective of young entrepreneurs, we use baking to grow real business skills, express our creativity, and connect with our community. Every cookie is made fresh to order.</p>
+      <p>Every purchase helps a local, independent business built on quality, creativity, and community first.</p>
+    </div>
+    <div class="story-art">
+      <div>
+        <p class="script">Big Cookies.<br>Big Smiles.<br>Big T's!</p>
+        <p style="margin-top:14px;opacity:.85">Add a team photo or your logo here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT / FAQ ============================ -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--gold)">Say hello</span>
+      <h2>Contact &amp; FAQ</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="info-block">
+        <h4>Order &amp; fulfilment</h4>
+        <p id="cInfoDays"></p>
+        <h4>Pickup</h4>
+        <p id="cInfoPickup"></p>
+        <h4>Allergens</h4>
+        <p id="cInfoAllergen"></p>
+        <div class="socials" id="socialRow"></div>
+      </div>
+      <div class="faq">
+        <details><summary>How far ahead do I need to order?</summary><div class="ans" id="faqLead"></div></details>
+        <details><summary>Can I customise my cookies?</summary><div class="ans">Yes! Our Black &amp; White cookies come with custom icing colours for birthdays, holidays, school events, sports teams, or any occasion. Just add your colours when you order.</div></details>
+        <details><summary>How do I pay?</summary><div class="ans">We take PromptPay transfers. Build your order, and we'll show you the total and PromptPay details. Send your slip to confirm and we start baking.</div></details>
+        <details><summary>Do you deliver to me?</summary><div class="ans" id="faqDelivery"></div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#E8A93A" stroke="#FBF6EC" stroke-width="2"/><circle cx="14" cy="16" r="2.4" fill="#33200F"/><circle cx="25" cy="14" r="2.1" fill="#33200F"/><circle cx="27" cy="25" r="2.4" fill="#33200F"/><circle cx="15" cy="26" r="2" fill="#33200F"/></svg>
+      <b style="color:var(--cream);font-size:1.2rem">Big <span style="color:var(--gold)">T's</span> Bakery</b>
+    </div>
+    <p class="fslogan">T-T-T-T'Soot! ♥</p>
+    <p>Fresh. Made to order. Made with love.</p>
+    <small>© <span id="year"></span> Big T's Bakery. Support local, support young entrepreneurs.</small>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   EDIT ZONE 2 — THE BAKERY'S DETAILS
+   Fill these in as the friend sends them. Everything the site
+   shows for contact, payment, delivery and FAQ reads from here.
+   Anything left as "TODO" shows a visible red placeholder on the site.
+   ============================================================ */
+const CONFIG = {
+  promptPayId:      "TODO — add PromptPay ID (phone or national ID)",
+  promptPayName:    "Big T's Bakery",
+  promptPayQR:      "",            // paste an image URL to the QR, or leave "" for the placeholder box
+  lineOrderUrl:     "",            // e.g. "https://line.me/R/ti/p/@bigtsbakery" — where orders are sent
+  lineDisplay:      "TODO — LINE ID",
+  instagramUrl:     "",            // e.g. "https://instagram.com/bigtsbakery"
+
+  deliveryFee:      null,          // e.g. 40  (in ฿). null = shows "TBC"
+  freeDeliveryOver: null,          // e.g. 300 (in ฿). null = no free-delivery rule
+  deliveryArea:     "TODO — list the areas/districts you deliver to",
+  pickupAddress:    "TODO — add pickup address",
+
+  orderDays:        "Monday to Friday",
+  fulfilDays:       "Saturday & Sunday",
+  leadTime:         "Order Monday to Friday. We bake and hand over on Saturday & Sunday. Friday cut-off: TODO (e.g. 6:00 PM).",
+
+  allergenNote:     "Baked in a home kitchen that also handles nuts, dairy, eggs, and wheat."
+};
+
+/* ============================================================
+   EDIT ZONE 3 — THE MENU
+   Cookies are ฿60 each. Any 3 large cookies = the ฿175 bundle
+   (applied automatically). To add a product, copy a line.
+   Set a seasonal item's price to a number to make it orderable.
+   ============================================================ */
+const COOKIE_PRICE = 60;
+const BUNDLE_QTY   = 3;
+const BUNDLE_PRICE = 175;
+
+const MENU = [
+  { id:"chocchip",  name:"Chocolate Chip", desc:"Classic, chewy, loaded with rich chocolate chips.", large:true },
+  { id:"birthday",  name:"Birthday Cake",  desc:"Soft, sweet, packed with sprinkles for every celebration.", large:true },
+  { id:"blackwhite",name:"Black & White",  desc:"Timeless favourite. Add your own icing colours.", large:true, custom:true },
+  { id:"smallpack", name:"Small Cookie Pack", desc:"Three small cookies, mix and match.", flatPrice:100 }
+];
+
+// Seasonal: price null = showcase only ("Price TBC"). Add a number to sell it.
+const SEASONAL = [
+  { id:"banana",    name:"Banana Bread",    price:null },
+  { id:"cranberry", name:"Cranberry Bread", price:null },
+  { id:"pumpkin",   name:"Pumpkin Pie",     price:null },
+  { id:"applecrisp",name:"Apple Crisp",     price:null }
+];
+
+const COLOR_PRESETS = ["Birthday","Sports team","Holiday","Pastel","School colours"];
+
+/* ============================================================
+   STATE + LOGIC  (below here you usually don't need to edit)
+   ============================================================ */
+const cart = {};            // id -> qty
+const notes = {};           // id -> custom text
+let fulfil = "pickup";
+
+const money = n => "฿" + Number(n).toLocaleString("en-US");
+const isTodo = v => typeof v === "string" && v.startsWith("TODO");
+
+function largeCount(){
+  return MENU.filter(m=>m.large).reduce((s,m)=>s+(cart[m.id]||0),0);
+}
+function cookiesSubtotal(){
+  let total = 0;
+  const lc = largeCount();
+  total += Math.floor(lc/BUNDLE_QTY)*BUNDLE_PRICE + (lc%BUNDLE_QTY)*COOKIE_PRICE;
+  MENU.forEach(m=>{ if(m.flatPrice) total += (cart[m.id]||0)*m.flatPrice; });
+  return total;
+}
+function deliveryCost(){
+  if(fulfil !== "delivery") return 0;
+  if(CONFIG.freeDeliveryOver && cookiesSubtotal() >= CONFIG.freeDeliveryOver) return 0;
+  return CONFIG.deliveryFee; // may be null -> handled as TBC in UI
+}
+
+/* -------- render the menu -------- */
+function renderMenu(){
+  const el = document.getElementById("menuPanel");
+  el.innerHTML = MENU.map(m=>{
+    const priceLabel = m.flatPrice ? money(m.flatPrice) : money(COOKIE_PRICE)+" ea";
+    const thumb = cookieSVG(m.id);
+    return `
+    <div class="menu-item">
+      <div class="mi-thumb">${thumb}</div>
+      <div class="mi-body">
+        <h4>${m.name}</h4>
+        <p>${m.desc}</p>
+        <div class="custom-row ${m.custom?'':''}" id="custom-${m.id}">
+          <label for="note-${m.id}">Icing colours for your Black &amp; White cookies</label>
+          <div class="chips">${COLOR_PRESETS.map(c=>`<button type="button" class="chip" onclick="addPreset('${m.id}','${c}')">${c}</button>`).join('')}</div>
+          <input type="text" id="note-${m.id}" placeholder="e.g. red & gold for a birthday" oninput="notes['${m.id}']=this.value" value="${notes[m.id]||''}">
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="mi-price">${priceLabel}</div>
+        <div class="stepper">
+          <button aria-label="Remove one ${m.name}" onclick="dec('${m.id}')">−</button>
+          <span class="qty" id="qty-${m.id}">${cart[m.id]||0}</span>
+          <button aria-label="Add one ${m.name}" onclick="inc('${m.id}')">+</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelector('#custom-blackwhite')?.classList.toggle('show', (cart['blackwhite']||0)>0);
+  MENU.forEach(m=>{ if(m.large){ /* bundle hint under large items */ } });
+}
+function cookieSVG(id){
+  if(id==="chocchip") return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="64" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/></g></svg>`;
+  if(id==="birthday") return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="#FBF6EC"/><rect x="36" y="34" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 39 35)"/><rect x="56" y="40" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(-30 59 41)"/><rect x="46" y="56" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(45 49 57)"/></svg>`;
+  if(id==="blackwhite") return `<svg viewBox="0 0 100 100"><defs><clipPath id="h-${id}"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#h-${id})"/></svg>`;
+  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><circle cx="34" cy="42" r="6" fill="#3A2417"/><circle cx="58" cy="38" r="5" fill="#3A2417"/><circle cx="50" cy="60" r="5.5" fill="#3A2417"/></svg>`;
+}
+
+function inc(id){ cart[id]=(cart[id]||0)+1; afterChange(id); }
+function dec(id){ if(cart[id]){ cart[id]--; if(cart[id]===0) delete cart[id]; } afterChange(id); }
+function addPreset(id,val){
+  const input=document.getElementById("note-"+id);
+  input.value = input.value ? input.value+", "+val : val;
+  notes[id]=input.value; input.focus();
+}
+function afterChange(id){
+  document.getElementById("qty-"+id).textContent = cart[id]||0;
+  document.querySelector('#custom-blackwhite')?.classList.toggle('show',(cart['blackwhite']||0)>0);
+  renderCart();
+}
+
+/* -------- render the cart -------- */
+function renderCart(){
+  const lines=document.getElementById("cartLines");
+  const ids=Object.keys(cart);
+  const has=ids.length>0;
+
+  document.getElementById("cartTotals").style.display = has?"block":"none";
+  document.getElementById("fulfilBox").style.display   = has?"block":"none";
+  document.getElementById("actions").style.display     = has?"block":"none";
+  if(!has){ lines.innerHTML=`<p class="cart-empty">Your box is empty. Add some cookies!</p>`; document.getElementById("payBox").classList.remove("show"); return; }
+
+  lines.innerHTML = ids.map(id=>{
+    const m=MENU.find(x=>x.id===id);
+    const note = (id==="blackwhite" && notes[id]) ? `<span class="cl-note">Colours: ${escapeHtml(notes[id])}</span>` : "";
+    return `<div class="cart-line"><span class="cl-name">${m.name}${note}<span class="cl-qty"> × ${cart[id]}</span></span></div>`;
+  }).join('');
+
+  const sub=cookiesSubtotal();
+  document.getElementById("subtotal").textContent=money(sub);
+
+  const dLabel=document.getElementById("deliveryLabel");
+  const dVal=document.getElementById("deliveryVal");
+  if(fulfil==="delivery"){
+    const d=deliveryCost();
+    dLabel.textContent="Delivery";
+    if(d===null){ dVal.innerHTML=`<span class="todo">TBC</span>`; }
+    else if(d===0){ dVal.textContent="Free"; }
+    else { dVal.textContent=money(d); }
+  } else {
+    dLabel.textContent="Pickup"; dVal.textContent="Free";
+  }
+
+  const d=deliveryCost();
+  const grand = sub + (typeof d==="number"?d:0);
+  document.getElementById("grandTotal").innerHTML = money(grand) + (d===null?` <span class="todo">+ delivery</span>`:"");
+
+  // bundle nudge
+  const lc=largeCount();
+  const toBundle = lc%BUNDLE_QTY===0 ? 0 : BUNDLE_QTY-(lc%BUNDLE_QTY);
+  // (kept simple; could surface a hint here)
+}
+
+function setFulfil(mode){
+  fulfil=mode;
+  document.getElementById("segPickup").classList.toggle("active",mode==="pickup");
+  document.getElementById("segDelivery").classList.toggle("active",mode==="delivery");
+  document.getElementById("addrField").style.display = mode==="delivery"?"block":"none";
+  renderCart();
+}
+
+/* -------- review + payment -------- */
+function reviewOrder(){
+  const box=document.getElementById("payBox");
+  const sub=cookiesSubtotal();
+  const d=deliveryCost();
+  const grand=sub+(typeof d==="number"?d:0);
+  document.getElementById("ppId").innerHTML = isTodo(CONFIG.promptPayId)
+      ? `<span class="todo">${CONFIG.promptPayId}</span>` : CONFIG.promptPayId;
+  document.getElementById("payTotal").innerHTML = money(grand)+(d===null?` <span class="todo">+ delivery</span>`:"");
+  const qr=document.getElementById("ppQr");
+  qr.innerHTML = CONFIG.promptPayQR ? `<img src="${CONFIG.promptPayQR}" alt="PromptPay QR" style="width:100%;height:100%;object-fit:contain">` : "Add your PromptPay QR image here";
+  box.classList.add("show");
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function buildOrderText(){
+  const sub=cookiesSubtotal();
+  const d=deliveryCost();
+  const grand=sub+(typeof d==="number"?d:0);
+  let t="🍪 BIG T'S BAKERY — NEW ORDER\n\n";
+  Object.keys(cart).forEach(id=>{
+    const m=MENU.find(x=>x.id===id);
+    t+=`• ${m.name} × ${cart[id]}`;
+    if(id==="blackwhite" && notes[id]) t+=` (colours: ${notes[id]})`;
+    t+="\n";
+  });
+  t+=`\nCookies: ${money(sub)}`;
+  if(fulfil==="delivery") t+=`\nDelivery: ${d===null?"TBC":(d===0?"Free":money(d))}`;
+  t+=`\nTotal: ${money(grand)}${d===null?" + delivery":""}\n`;
+  t+=`\nFulfilment: ${fulfil==="delivery"?"Delivery":"Pickup"}`;
+  const v=id=>document.getElementById(id)?.value?.trim();
+  if(v("fDate"))  t+=`\nDate: ${v("fDate")}`;
+  if(v("fName"))  t+=`\nName: ${v("fName")}`;
+  if(v("fPhone")) t+=`\nContact: ${v("fPhone")}`;
+  if(fulfil==="delivery" && v("fAddr")) t+=`\nAddress: ${v("fAddr")}`;
+  if(v("fNotes")) t+=`\nNotes: ${v("fNotes")}`;
+  t+=`\n\nI'll send my PromptPay slip to confirm. Thank you!`;
+  return t;
+}
+
+function copyOrder(){
+  navigator.clipboard.writeText(buildOrderText())
+    .then(()=>showToast("Order copied — paste it to us on LINE ♥"))
+    .catch(()=>showToast("Couldn't copy automatically. Select and copy your order."));
+}
+function sendLine(){
+  copyOrder();
+  if(CONFIG.lineOrderUrl){ window.open(CONFIG.lineOrderUrl,"_blank"); }
+  else { showToast("Add the bakery's LINE link in CONFIG.lineOrderUrl"); }
+}
+
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("show");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),3200);
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* -------- seasonal showcase -------- */
+function renderSeasonal(){
+  const grid=document.getElementById("seasonGrid");
+  grid.innerHTML=SEASONAL.map(s=>{
+    const price = s.price===null ? `<span class="todo">Price TBC</span>` : money(s.price);
+    return `<div class="season-card">
+      <svg class="s-ico" viewBox="0 0 100 100"><rect x="18" y="40" width="64" height="42" rx="8" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><path d="M18 52 Q50 38 82 52" fill="none" stroke="#8a5a2b" stroke-width="3"/><circle cx="34" cy="60" r="3" fill="#5a3a1c"/><circle cx="52" cy="64" r="3" fill="#5a3a1c"/><circle cx="66" cy="58" r="3" fill="#5a3a1c"/></svg>
+      <h4>${s.name}</h4>
+      <div class="s-price">${price}</div>
+    </div>`;
+  }).join('');
+}
+
+/* -------- populate contact/FAQ from CONFIG -------- */
+function renderContact(){
+  const td = v => isTodo(v) ? `<span class="todo">${v}</span>` : v;
+  document.getElementById("cInfoDays").innerHTML = `Orders ${CONFIG.orderDays}. Handed over ${CONFIG.fulfilDays}.`;
+  document.getElementById("cInfoPickup").innerHTML = td(CONFIG.pickupAddress);
+  document.getElementById("cInfoAllergen").innerHTML = CONFIG.allergenNote;
+  document.getElementById("faqLead").innerHTML = td(CONFIG.leadTime);
+  const feeStr = CONFIG.deliveryFee===null ? `<span class="todo">delivery area and fee to be confirmed</span>`
+    : `a ${money(CONFIG.deliveryFee)} delivery fee${CONFIG.freeDeliveryOver?`, free over ${money(CONFIG.freeDeliveryOver)}`:''}`;
+  document.getElementById("faqDelivery").innerHTML = `We deliver locally: ${td(CONFIG.deliveryArea)}. Pickup is free; delivery has ${feeStr}.`;
+
+  const social=document.getElementById("socialRow");
+  let s="";
+  if(CONFIG.instagramUrl) s+=`<a class="social-btn" href="${CONFIG.instagramUrl}" target="_blank">Instagram</a>`;
+  if(CONFIG.lineOrderUrl) s+=`<a class="social-btn" href="${CONFIG.lineOrderUrl}" target="_blank">LINE ${isTodo(CONFIG.lineDisplay)?'':CONFIG.lineDisplay}</a>`;
+  if(!s) s=`<span class="todo">Add Instagram &amp; LINE links in CONFIG</span>`;
+  social.innerHTML=s;
+}
+
+function toggleNav(btn){
+  const links=document.getElementById("navLinks");
+  const open=links.classList.toggle("open");
+  btn.setAttribute("aria-expanded", open);
+}
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.remove('open');
+}));
+
+/* -------- init -------- */
+document.getElementById("year").textContent=new Date().getFullYear();
+renderMenu(); renderCart(); renderSeasonal(); renderContact();
+</script>
+</body>
+</html>
