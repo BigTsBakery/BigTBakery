@@ -129,10 +129,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .hero-slogan .heart{color:var(--berry)}
 
 .cookie-stack{position:relative;height:340px;display:flex;align-items:center;justify-content:center}
-.cookie-stack img{position:absolute;filter:drop-shadow(0 14px 18px rgba(0,0,0,.4))}
-.c-a{width:200px;transform:translate(-70px,-30px) rotate(-12deg)}
-.c-b{width:210px;transform:translate(60px,10px) rotate(8deg)}
-.c-c{width:180px;transform:translate(-10px,90px) rotate(-3deg)}
+.hero-logo{width:auto;max-width:100%;max-height:340px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.45))}
 
 /* wave divider */
 .wave{display:block;width:100%;height:60px;margin-top:-60px;position:relative;z-index:2}
@@ -268,8 +265,6 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 }
 .step h4{font-size:1.25rem;margin-bottom:.3rem}
 .step p{color:var(--brown)}
-.steps-img{width:100%;max-width:780px;margin:0 auto;display:block;border-radius:var(--radius);box-shadow:0 14px 30px var(--shadow)}
-.steps-caption{text-align:center;color:var(--brown);font-weight:700;max-width:640px;margin:18px auto 0}
 
 /* ============================================================ STORY */
 .story{background:var(--cream)}
@@ -323,7 +318,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
   .hero .wrap{grid-template-columns:1fr;text-align:center}
   .hero-cta{justify-content:center}
   .hero .lede{margin-left:auto;margin-right:auto}
-  .cookie-stack{height:260px;margin-top:10px}
+  .cookie-stack{height:240px;margin-top:10px}
+  .hero-logo{max-height:240px}
   .order-grid{grid-template-columns:1fr}
   .ticket{position:static}
   .story-grid,.contact-grid{grid-template-columns:1fr}
@@ -373,10 +369,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       </div>
       <p class="hero-slogan">T-T-T-T'Soot! <span class="heart">♥</span></p>
     </div>
-    <div class="cookie-stack" aria-hidden="true">
-      <img class="c-a" src="images/cookie-chocchip.png" alt="">
-      <img class="c-b" src="images/cookie-birthday.png" alt="">
-      <img class="c-c" src="images/cookie-blackwhite.png" alt="">
+    <div class="cookie-stack">
+      <img class="hero-logo" src="images/logo.png" alt="Big T's Bakery logo">
     </div>
   </div>
 </header>
@@ -527,8 +521,11 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       <span class="eyebrow">How it works</span>
       <h2>Three steps to fresh cookies</h2>
     </div>
-    <img class="steps-img" src="images/steps.jpg" alt="Made to order, just for you: 1. Choose your goodies. 2. Customise. 3. Pick your time and place." loading="lazy">
-    <p class="steps-caption">Choose your goodies. Customise. Pick your time and place. We bake it fresh and hand it over on the weekend.</p>
+    <div class="step-grid">
+      <div class="step"><div class="num">1</div><h4>Choose your goodies</h4><p>Browse the menu and build your box.</p></div>
+      <div class="step"><div class="num">2</div><h4>Customise</h4><p>Add your icing colours and any special requests.</p></div>
+      <div class="step"><div class="num">3</div><h4>Pick your time &amp; place</h4><p>Choose pickup or delivery, pay by PromptPay, done.</p></div>
+    </div>
   </div>
 </section>
 
@@ -706,8 +703,18 @@ function renderMenu(){
 const COOKIE_IMG={chocchip:"images/cookie-chocchip.png",birthday:"images/cookie-birthday.png",blackwhite:"images/cookie-blackwhite.png"};
 function cookieSVG(id){
   if(COOKIE_IMG[id]) return `<img src="${COOKIE_IMG[id]}" alt="" style="width:100%;height:100%;object-fit:contain">`;
-  // small pack: simple stacked-cookies mark
-  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><circle cx="34" cy="42" r="6" fill="#3A2417"/><circle cx="58" cy="38" r="5" fill="#3A2417"/><circle cx="50" cy="60" r="5.5" fill="#3A2417"/></svg>`;
+  // small pack: cluster of three mixed cookies (choc chip, birthday, black & white)
+  return `<svg viewBox="0 0 100 100"><g stroke-width="2">
+    <circle cx="33" cy="41" r="25" fill="#C88A4A" stroke="#8a5a2b"/>
+    <g fill="#3A2417"><circle cx="25" cy="36" r="3.2"/><circle cx="40" cy="33" r="3"/><circle cx="43" cy="45" r="3.2"/><circle cx="27" cy="49" r="3"/><circle cx="34" cy="43" r="2.6"/></g>
+    <circle cx="67" cy="40" r="25" fill="#F3E6C6" stroke="#d9c48f"/>
+    <circle cx="67" cy="40" r="17" fill="#FBF6EC" stroke="none"/>
+    <g stroke="none"><circle cx="61" cy="35" r="1.8" fill="#C23B2B"/><circle cx="72" cy="35" r="1.8" fill="#3AA3C2"/><circle cx="67" cy="41" r="1.8" fill="#E8A93A"/><circle cx="62" cy="45" r="1.8" fill="#6BBE5B"/><circle cx="73" cy="44" r="1.8" fill="#C23B2B"/><circle cx="67" cy="32" r="1.8" fill="#3AA3C2"/></g>
+    <defs><clipPath id="sp-bw"><rect x="50" y="44" width="50" height="46"/></clipPath></defs>
+    <circle cx="50" cy="67" r="27" fill="#F3E6C6" stroke="#d9c48f"/>
+    <circle cx="50" cy="67" r="20" fill="#FBF6EC" stroke="none"/>
+    <circle cx="50" cy="67" r="20" fill="#3A2417" stroke="none" clip-path="url(#sp-bw)"/>
+  </g></svg>`;
 }
 
 function inc(id){ cart[id]=(cart[id]||0)+1; afterChange(id); }
