@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Big T's Bakery — Fresh. Made to Order. Made with Love.</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
 <meta name="description" content="Big T's Bakery: fresh, made-to-order gourmet cookies and seasonal desserts. Customise your Black & White cookies. Local pickup and delivery.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,7 +83,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 }
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{display:flex;align-items:center;gap:.55rem;color:var(--cream)}
-.brand .mark{width:34px;height:34px;flex:none}
+.brand .mark{height:40px;width:auto;flex:none;display:block}
 .brand b{font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:.01em}
 .brand b span{color:var(--gold)}
 .nav-links{display:flex;gap:1.4rem;align-items:center}
@@ -128,7 +129,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .hero-slogan .heart{color:var(--berry)}
 
 .cookie-stack{position:relative;height:340px;display:flex;align-items:center;justify-content:center}
-.cookie-stack svg{position:absolute;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.cookie-stack img{position:absolute;filter:drop-shadow(0 14px 18px rgba(0,0,0,.4))}
 .c-a{width:200px;transform:translate(-70px,-30px) rotate(-12deg)}
 .c-b{width:210px;transform:translate(60px,10px) rotate(8deg)}
 .c-c{width:180px;transform:translate(-10px,90px) rotate(-3deg)}
@@ -250,8 +251,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .seasonal .section-head h2{color:var(--cream)}
 .seasonal .section-head p{color:rgba(246,236,214,.8)}
 .season-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.season-card{background:var(--choc-2);border:2px solid rgba(232,169,58,.28);border-radius:14px;padding:20px 16px;text-align:center}
-.season-card .s-ico{width:56px;height:56px;margin:0 auto 10px}
+.season-card{background:var(--choc-2);border:2px solid rgba(232,169,58,.28);border-radius:14px;padding:0 0 16px;text-align:center;overflow:hidden}
+.season-card .s-photo{width:100%;height:150px;object-fit:cover;display:block;margin-bottom:12px}
 .season-card h4{color:var(--cream);font-size:1.15rem}
 .season-card .s-price{color:var(--gold);font-weight:800;font-family:var(--font-display);margin-top:6px}
 .season-note{text-align:center;margin-top:26px;font-family:var(--font-script);color:var(--gold);font-size:1.3rem}
@@ -267,14 +268,16 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 }
 .step h4{font-size:1.25rem;margin-bottom:.3rem}
 .step p{color:var(--brown)}
+.steps-img{width:100%;max-width:780px;margin:0 auto;display:block;border-radius:var(--radius);box-shadow:0 14px 30px var(--shadow)}
+.steps-caption{text-align:center;color:var(--brown);font-weight:700;max-width:640px;margin:18px auto 0}
 
 /* ============================================================ STORY */
 .story{background:var(--cream)}
 .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .story-copy h2{font-size:clamp(2rem,4vw,2.7rem);margin-bottom:1rem}
 .story-copy p{color:var(--ink);margin-bottom:1rem;font-size:1.05rem}
-.story-art{background:var(--choc);border-radius:var(--radius);min-height:300px;display:grid;place-items:center;color:var(--cream);text-align:center;padding:30px;border:3px solid var(--gold)}
-.story-art .script{font-size:2rem;color:var(--gold)}
+.story-art{border-radius:var(--radius);overflow:hidden;border:3px solid var(--gold);box-shadow:0 14px 30px var(--shadow)}
+.story-art img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* ============================================================ CONTACT / FAQ */
 .contact{background:var(--brown);color:var(--cream)}
@@ -284,6 +287,13 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .info-block h4:first-child{margin-top:0}
 .info-block p{color:rgba(246,236,214,.9)}
 .socials{display:flex;gap:12px;margin-top:16px}
+.line-order{display:flex;gap:16px;align-items:center;margin-top:20px;background:rgba(246,236,214,.1);border:2px solid rgba(232,169,58,.35);border-radius:14px;padding:16px}
+.line-order img{width:110px;height:110px;border-radius:10px;background:#fff;padding:6px;flex:none}
+.line-order .lo-copy h4{color:var(--gold);margin:0 0 4px}
+.line-order .lo-copy p{color:rgba(246,236,214,.9);font-size:.9rem;margin-bottom:10px}
+.line-order .lo-btn{display:inline-flex;align-items:center;gap:.4rem;background:#06C755;color:#fff;font-family:var(--font-display);font-weight:700;padding:.55rem 1.1rem;border-radius:999px;font-size:.95rem}
+.line-order .lo-btn:hover{filter:brightness(1.08)}
+@media(max-width:420px){.line-order{flex-direction:column;text-align:center}}
 .social-btn{display:inline-flex;align-items:center;gap:.5rem;background:rgba(246,236,214,.12);padding:.6rem 1rem;border-radius:999px;font-weight:800;font-size:.9rem}
 .social-btn:hover{background:var(--gold);color:var(--choc)}
 .faq details{background:var(--choc-2);border:2px solid rgba(232,169,58,.25);border-radius:12px;margin-bottom:10px;overflow:hidden}
@@ -335,7 +345,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 <nav class="nav">
   <div class="wrap">
     <a href="#top" class="brand" aria-label="Big T's Bakery home">
-      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#E8A93A" stroke="#33200F" stroke-width="3"/><circle cx="14" cy="16" r="2.4" fill="#33200F"/><circle cx="25" cy="14" r="2.1" fill="#33200F"/><circle cx="27" cy="25" r="2.4" fill="#33200F"/><circle cx="15" cy="26" r="2" fill="#33200F"/><circle cx="21" cy="21" r="1.8" fill="#33200F"/></svg>
+      <img class="mark" src="images/logo.png" alt="Big T's Bakery logo">
       <b>Big <span>T's</span> Bakery</b>
     </a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleNav(this)">☰</button>
@@ -364,9 +374,9 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       <p class="hero-slogan">T-T-T-T'Soot! <span class="heart">♥</span></p>
     </div>
     <div class="cookie-stack" aria-hidden="true">
-      <svg class="c-a" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><circle cx="50" cy="50" r="44" fill="url(#tex)"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="66" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/><circle cx="52" cy="50" r="4"/><circle cx="30" cy="52" r="3.6"/></g></svg>
-      <svg class="c-b" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="#FBF6EC"/><g><rect x="34" y="30" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 37 31)"/><rect x="58" y="34" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(-30 61 35)"/><rect x="46" y="44" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(50 49 45)"/><rect x="60" y="58" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(-15 63 59)"/><rect x="36" y="60" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(35 39 61)"/><rect x="50" y="62" width="6" height="2.6" rx="1.3" fill="#6BbE5b" transform="rotate(-40 53 63)"/></g></svg>
-      <svg class="c-c" viewBox="0 0 100 100"><defs><clipPath id="half"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#half)"/></svg>
+      <img class="c-a" src="images/cookie-chocchip.png" alt="">
+      <img class="c-b" src="images/cookie-birthday.png" alt="">
+      <img class="c-c" src="images/cookie-blackwhite.png" alt="">
     </div>
   </div>
 </header>
@@ -394,19 +404,19 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
     </div>
     <div class="sig-grid">
       <div class="sig-card">
-        <svg class="thumb" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="66" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/><circle cx="52" cy="50" r="4"/></g></svg>
+        <img class="thumb" src="images/cookie-chocchip.png" alt="Chocolate chip cookie">
         <h3>Chocolate Chip</h3>
         <p>Classic, chewy, and loaded with rich chocolate chips.</p>
         <span class="tag">Year-round</span>
       </div>
       <div class="sig-card birthday">
-        <svg class="thumb" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="32" fill="#FBF6EC"/><g><rect x="36" y="32" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 39 33)"/><rect x="58" y="36" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(-30 61 37)"/><rect x="46" y="46" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(50 49 47)"/><rect x="58" y="58" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(-15 61 59)"/><rect x="38" y="60" width="6" height="2.6" rx="1.3" fill="#6BbE5b" transform="rotate(35 41 61)"/></g></svg>
+        <img class="thumb" src="images/cookie-birthday.png" alt="Birthday cake cookie with sprinkles">
         <h3>Birthday Cake</h3>
         <p>Soft, sweet, and packed with sprinkles for every celebration.</p>
         <span class="tag">Year-round</span>
       </div>
       <div class="sig-card">
-        <svg class="thumb" viewBox="0 0 100 100"><defs><clipPath id="half2"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#half2)"/></svg>
+        <img class="thumb" src="images/cookie-blackwhite.png" alt="Black and white iced cookie">
         <h3>Black &amp; White</h3>
         <p>A timeless favourite. Now with custom icing colours, just for you.</p>
         <span class="tag">Customisable</span>
@@ -517,11 +527,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       <span class="eyebrow">How it works</span>
       <h2>Three steps to fresh cookies</h2>
     </div>
-    <div class="step-grid">
-      <div class="step"><div class="num">1</div><h4>Choose your goodies</h4><p>Browse the menu and build your box.</p></div>
-      <div class="step"><div class="num">2</div><h4>Customise</h4><p>Add your icing colours and any special requests.</p></div>
-      <div class="step"><div class="num">3</div><h4>Pick your time &amp; place</h4><p>Choose pickup or delivery, pay by PromptPay, done.</p></div>
-    </div>
+    <img class="steps-img" src="images/steps.jpg" alt="Made to order, just for you: 1. Choose your goodies. 2. Customise. 3. Pick your time and place." loading="lazy">
+    <p class="steps-caption">Choose your goodies. Customise. Pick your time and place. We bake it fresh and hand it over on the weekend.</p>
   </div>
 </section>
 
@@ -536,10 +543,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       <p>Every purchase helps a local, independent business built on quality, creativity, and community first.</p>
     </div>
     <div class="story-art">
-      <div>
-        <p class="script">Big Cookies.<br>Big Smiles.<br>Big T's!</p>
-        <p style="margin-top:14px;opacity:.85">Add a team photo or your logo here.</p>
-      </div>
+      <img src="images/story.jpg" alt="Big T's Bakery: Big Cookies, Big Smiles" loading="lazy">
     </div>
   </div>
 </section>
@@ -559,6 +563,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
         <p id="cInfoPickup"></p>
         <h4>Allergens</h4>
         <p id="cInfoAllergen"></p>
+        <div class="line-order" id="lineOrder"></div>
         <div class="socials" id="socialRow"></div>
       </div>
       <div class="faq">
@@ -575,7 +580,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 <footer class="footer">
   <div class="wrap">
     <div class="brand">
-      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#E8A93A" stroke="#FBF6EC" stroke-width="2"/><circle cx="14" cy="16" r="2.4" fill="#33200F"/><circle cx="25" cy="14" r="2.1" fill="#33200F"/><circle cx="27" cy="25" r="2.4" fill="#33200F"/><circle cx="15" cy="26" r="2" fill="#33200F"/></svg>
+      <img class="mark" src="images/logo.png" alt="Big T's Bakery logo">
       <b style="color:var(--cream);font-size:1.2rem">Big <span style="color:var(--gold)">T's</span> Bakery</b>
     </div>
     <p class="fslogan">T-T-T-T'Soot! ♥</p>
@@ -597,8 +602,9 @@ const CONFIG = {
   promptPayId:      "TODO — add PromptPay ID (phone or national ID)",
   promptPayName:    "Big T's Bakery",
   promptPayQR:      "",            // paste an image URL to the QR, or leave "" for the placeholder box
-  lineOrderUrl:     "",            // e.g. "https://line.me/R/ti/p/@bigtsbakery" — where orders are sent
-  lineDisplay:      "TODO — LINE ID",
+  lineOrderUrl:     "https://lin.ee/5Dtfp3k",   // where orders are sent
+  lineDisplay:      "",            // optional @id to show next to the LINE button
+  lineQR:           "images/line-qr.jpg",       // scannable LINE code shown in Contact
   instagramUrl:     "",            // e.g. "https://instagram.com/bigtsbakery"
 
   deliveryFee:      null,          // e.g. 40  (in ฿). null = shows "TBC"
@@ -697,10 +703,10 @@ function renderMenu(){
   document.querySelector('#custom-blackwhite')?.classList.toggle('show', (cart['blackwhite']||0)>0);
   MENU.forEach(m=>{ if(m.large){ /* bundle hint under large items */ } });
 }
+const COOKIE_IMG={chocchip:"images/cookie-chocchip.png",birthday:"images/cookie-birthday.png",blackwhite:"images/cookie-blackwhite.png"};
 function cookieSVG(id){
-  if(id==="chocchip") return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><g fill="#3A2417"><circle cx="38" cy="36" r="5"/><circle cx="62" cy="40" r="4.4"/><circle cx="64" cy="62" r="5"/><circle cx="40" cy="64" r="4.6"/></g></svg>`;
-  if(id==="birthday") return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="#FBF6EC"/><rect x="36" y="34" width="6" height="2.6" rx="1.3" fill="#C23B2B" transform="rotate(20 39 35)"/><rect x="56" y="40" width="6" height="2.6" rx="1.3" fill="#3AA3C2" transform="rotate(-30 59 41)"/><rect x="46" y="56" width="6" height="2.6" rx="1.3" fill="#E8A93A" transform="rotate(45 49 57)"/></svg>`;
-  if(id==="blackwhite") return `<svg viewBox="0 0 100 100"><defs><clipPath id="h-${id}"><rect x="50" y="0" width="50" height="100"/></clipPath></defs><circle cx="50" cy="50" r="44" fill="#F3E6C6" stroke="#d9c48f" stroke-width="3"/><circle cx="50" cy="50" r="36" fill="#FBF6EC"/><circle cx="50" cy="50" r="36" fill="#3A2417" clip-path="url(#h-${id})"/></svg>`;
+  if(COOKIE_IMG[id]) return `<img src="${COOKIE_IMG[id]}" alt="" style="width:100%;height:100%;object-fit:contain">`;
+  // small pack: simple stacked-cookies mark
   return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><circle cx="34" cy="42" r="6" fill="#3A2417"/><circle cx="58" cy="38" r="5" fill="#3A2417"/><circle cx="50" cy="60" r="5.5" fill="#3A2417"/></svg>`;
 }
 
@@ -831,7 +837,7 @@ function renderSeasonal(){
   grid.innerHTML=SEASONAL.map(s=>{
     const price = s.price===null ? `<span class="todo">Price TBC</span>` : money(s.price);
     return `<div class="season-card">
-      <svg class="s-ico" viewBox="0 0 100 100"><rect x="18" y="40" width="64" height="42" rx="8" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/><path d="M18 52 Q50 38 82 52" fill="none" stroke="#8a5a2b" stroke-width="3"/><circle cx="34" cy="60" r="3" fill="#5a3a1c"/><circle cx="52" cy="64" r="3" fill="#5a3a1c"/><circle cx="66" cy="58" r="3" fill="#5a3a1c"/></svg>
+      <img class="s-photo" src="images/seasonal-${s.id}.jpg" alt="${s.name}" loading="lazy">
       <h4>${s.name}</h4>
       <div class="s-price">${price}</div>
     </div>`;
@@ -849,11 +855,22 @@ function renderContact(){
     : `a ${money(CONFIG.deliveryFee)} delivery fee${CONFIG.freeDeliveryOver?`, free over ${money(CONFIG.freeDeliveryOver)}`:''}`;
   document.getElementById("faqDelivery").innerHTML = `We deliver locally: ${td(CONFIG.deliveryArea)}. Pickup is free; delivery has ${feeStr}.`;
 
+  const lo=document.getElementById("lineOrder");
+  if(CONFIG.lineOrderUrl){
+    lo.innerHTML=`
+      ${CONFIG.lineQR?`<img src="${CONFIG.lineQR}" alt="LINE QR code to order from Big T's Bakery">`:''}
+      <div class="lo-copy">
+        <h4>Order on LINE</h4>
+        <p>Scan the code or tap below to message us your order and send your PromptPay slip.</p>
+        <a class="lo-btn" href="${CONFIG.lineOrderUrl}" target="_blank" rel="noopener">Open LINE ${CONFIG.lineDisplay||''}</a>
+      </div>`;
+    lo.style.display="flex";
+  } else { lo.style.display="none"; }
+
   const social=document.getElementById("socialRow");
   let s="";
-  if(CONFIG.instagramUrl) s+=`<a class="social-btn" href="${CONFIG.instagramUrl}" target="_blank">Instagram</a>`;
-  if(CONFIG.lineOrderUrl) s+=`<a class="social-btn" href="${CONFIG.lineOrderUrl}" target="_blank">LINE ${isTodo(CONFIG.lineDisplay)?'':CONFIG.lineDisplay}</a>`;
-  if(!s) s=`<span class="todo">Add Instagram &amp; LINE links in CONFIG</span>`;
+  if(CONFIG.instagramUrl) s+=`<a class="social-btn" href="${CONFIG.instagramUrl}" target="_blank" rel="noopener">Instagram</a>`;
+  if(!s) s=`<span class="todo">Add your Instagram link in CONFIG</span>`;
   social.innerHTML=s;
 }
 
