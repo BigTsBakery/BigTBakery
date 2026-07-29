@@ -203,6 +203,22 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 }
 .custom-row input::placeholder{color:var(--brown);opacity:.7}
 .custom-row input:focus{outline:none;border-color:var(--gold);background:#fff}
+.sizes{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.size-btn{font-family:var(--font-display);font-weight:700;font-size:.85rem;color:var(--choc);background:var(--cream);border:2px solid var(--line);border-radius:10px;padding:.4rem .7rem;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.size-btn:hover{border-color:var(--gold);background:#fff;transform:translateY(-1px)}
+.size-btn:active{transform:translateY(1px)}
+.custom-meta{display:block;font-weight:600;font-size:.72rem;color:var(--brown);text-transform:none;letter-spacing:0;margin-top:3px}
+.colorcount{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font-weight:700;font-size:.88rem;color:var(--choc)}
+.custom-hint{font-size:.78rem;color:var(--gold-deep);font-weight:700;margin-top:6px;min-height:1em}
+.cl-size{color:var(--brown);font-weight:600}
+.cl-right{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.cl-price{font-weight:800;font-family:var(--font-display);color:var(--choc)}
+.mini-stepper{display:inline-flex;align-items:center;gap:6px}
+.mini-stepper button{width:24px;height:24px;border-radius:7px;background:var(--brown);color:var(--cream);font-weight:700;line-height:1;display:grid;place-items:center;font-size:1rem}
+.mini-stepper button:hover{background:var(--choc)}
+.mini-stepper b{min-width:16px;text-align:center;font-family:var(--font-display)}
+.cart-note{border-bottom:none}
+.cart-note .cl-note{font-size:.8rem;color:var(--gold-deep);font-weight:700}
 
 /* ---- ticket / cart ---- */
 .ticket{
@@ -453,6 +469,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 
           <div class="cart-totals" id="cartTotals" style="display:none">
             <div class="row"><span>Cookies</span><span id="subtotal">฿0</span></div>
+            <div class="row" id="colorRow" style="display:none"><span>Custom colours</span><span id="colorVal">฿0</span></div>
             <div class="row"><span id="deliveryLabel">Delivery</span><span id="deliveryVal">—</span></div>
             <div class="row grand"><span>Total</span><span id="grandTotal">฿0</span></div>
           </div>
@@ -520,7 +537,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
       <p>Made for every season, baked fresh when they're in. Follow us so you don't miss a drop.</p>
     </div>
     <div class="season-grid" id="seasonGrid"><!-- injected by JS --></div>
-    <p class="season-note">Seasonal specials · made fresh · gone before you know it ♥</p>
+    <p class="season-note">Seasonal specials · made fresh · order them in the menu above ♥</p>
   </div>
 </section>
 
@@ -628,27 +645,43 @@ const CONFIG = {
 
 /* ============================================================
    EDIT ZONE 3 — THE MENU
-   Cookies are ฿60 each. Any 3 large cookies = the ฿175 bundle
-   (applied automatically). To add a product, copy a line.
-   Set a seasonal item's price to a number to make it orderable.
+   Each product has pack sizes with set prices: {n: cookies, p: ฿}.
+   Change a price by editing p. Add a size with another {n,p}.
+   Add a product by copying a block. Thumbnails come from THUMB.
    ============================================================ */
-const COOKIE_PRICE = 60;
-const BUNDLE_QTY   = 3;
-const BUNDLE_PRICE = 175;
-
 const MENU = [
-  { id:"chocchip",  name:"Chocolate Chip", desc:"Classic, chewy, loaded with rich chocolate chips.", large:true },
-  { id:"birthday",  name:"Birthday Cake",  desc:"Soft, sweet, packed with sprinkles for every celebration.", large:true },
-  { id:"blackwhite",name:"Black & White",  desc:"Timeless favourite. Add your own icing colours.", large:true, custom:true },
-  { id:"smallpack", name:"Small Cookie Pack", desc:"Three small cookies, mix and match.", flatPrice:100 }
+  { id:"blackwhite", name:"Black & White Cookies", desc:"Timeless favourite. Add custom icing colours on 6+ packs.",
+    sizes:[{n:3,p:220},{n:6,p:380},{n:12,p:750},{n:24,p:1400}], custom:true },
+  { id:"chocchip",   name:"Chocolate Chip Cookies", desc:"Classic, chewy, loaded with rich chocolate chips.",
+    sizes:[{n:3,p:120},{n:6,p:220},{n:12,p:420},{n:24,p:810}] },
+  { id:"birthday",   name:"Birthday Cake Cookies", desc:"Soft, sweet, packed with sprinkles for every celebration.",
+    sizes:[{n:3,p:120},{n:6,p:220},{n:12,p:420},{n:24,p:810}] },
+  { id:"donuts",     name:"Pumpkin Donuts", desc:"Cake donuts with a maple glaze.",
+    sizes:[{n:3,p:250},{n:6,p:475},{n:12,p:950}] },
+  { id:"pumpkinpie", name:"Pumpkin Pie", desc:"Classic spiced pumpkin pie.", sizes:[{n:1,p:400}] },
+  { id:"cranberry",  name:"Cranberry Bread", desc:"Sweet, tart, and made fresh.", sizes:[{n:1,p:400}] },
+  { id:"banana",     name:"Banana Bread", desc:"Moist, rich, a classic comfort loaf.", sizes:[{n:1,p:300}] },
+  { id:"applecrisp", name:"Apple Crisp", desc:"Warm baked apples with a crumble top.", sizes:[{n:1,p:350}] }
 ];
 
-// Seasonal: price null = showcase only ("Price TBC"). Add a number to sell it.
+// Black & White custom colours
+const COLOR_PRICE = 30;   // ฿ per colour
+const COLOR_MIN   = 6;    // minimum pack size to allow colours
+
+// thumbnails (photos where we have them; donut is drawn as SVG)
+const THUMB = {
+  blackwhite:"images/cookie-blackwhite.png", chocchip:"images/cookie-chocchip.png",
+  birthday:"images/cookie-birthday.png", pumpkinpie:"images/seasonal-pumpkin.jpg",
+  cranberry:"images/seasonal-cranberry.jpg", banana:"images/seasonal-banana.jpg",
+  applecrisp:"images/seasonal-applecrisp.jpg"
+};
+
+// Seasonal showcase strip (visual only — order these in the menu above)
 const SEASONAL = [
-  { id:"banana",    name:"Banana Bread",    price:null },
-  { id:"cranberry", name:"Cranberry Bread", price:null },
-  { id:"pumpkin",   name:"Pumpkin Pie",     price:null },
-  { id:"applecrisp",name:"Apple Crisp",     price:null }
+  { id:"banana",    name:"Banana Bread",    price:300 },
+  { id:"cranberry", name:"Cranberry Bread", price:400 },
+  { id:"pumpkin",   name:"Pumpkin Pie",     price:400 },
+  { id:"applecrisp",name:"Apple Crisp",     price:350 }
 ];
 
 const COLOR_PRESETS = ["Birthday","Sports team","Holiday","Pastel","School colours"];
@@ -656,109 +689,123 @@ const COLOR_PRESETS = ["Birthday","Sports team","Holiday","Pastel","School colou
 /* ============================================================
    STATE + LOGIC  (below here you usually don't need to edit)
    ============================================================ */
-const cart = {};            // id -> qty
-const notes = {};           // id -> custom text
+const cart = {};            // "id|n" -> number of packs
+const notes = {};           // id -> custom colour text
+let colorCount = 0;         // Black & White custom colours
 let fulfil = "pickup";
 
 const money = n => "฿" + Number(n).toLocaleString("en-US");
 const isTodo = v => typeof v === "string" && v.startsWith("TODO");
 
-function largeCount(){
-  return MENU.filter(m=>m.large).reduce((s,m)=>s+(cart[m.id]||0),0);
-}
+function product(id){ return MENU.find(m=>m.id===id); }
+function packPrice(id,n){ const p=product(id); const s=p&&p.sizes.find(x=>x.n===n); return s?s.p:0; }
+function bwEligible(){ return Object.keys(cart).some(k=>{const a=k.split('|');return a[0]==="blackwhite"&&+a[1]>=COLOR_MIN;}); }
+function colorCharge(){ return bwEligible()? colorCount*COLOR_PRICE : 0; }
 function cookiesSubtotal(){
-  let total = 0;
-  const lc = largeCount();
-  total += Math.floor(lc/BUNDLE_QTY)*BUNDLE_PRICE + (lc%BUNDLE_QTY)*COOKIE_PRICE;
-  MENU.forEach(m=>{ if(m.flatPrice) total += (cart[m.id]||0)*m.flatPrice; });
-  return total;
+  let t=0;
+  for(const k in cart){ const a=k.split('|'); t += packPrice(a[0],+a[1])*cart[k]; }
+  return t;
 }
 function deliveryCost(){
   if(fulfil !== "delivery") return 0;
-  if(CONFIG.freeDeliveryOver && cookiesSubtotal() >= CONFIG.freeDeliveryOver) return 0;
+  if(CONFIG.freeDeliveryOver && (cookiesSubtotal()+colorCharge()) >= CONFIG.freeDeliveryOver) return 0;
   return CONFIG.deliveryFee; // may be null -> handled as TBC in UI
 }
 
 /* -------- render the menu -------- */
 function renderMenu(){
   const el = document.getElementById("menuPanel");
-  el.innerHTML = MENU.map(m=>{
-    const priceLabel = m.flatPrice ? money(m.flatPrice) : money(COOKIE_PRICE)+" ea";
-    const thumb = cookieSVG(m.id);
-    return `
+  el.innerHTML = MENU.map(m=>`
     <div class="menu-item">
-      <div class="mi-thumb">${thumb}</div>
+      <div class="mi-thumb">${cookieSVG(m.id)}</div>
       <div class="mi-body">
         <h4>${m.name}</h4>
         <p>${m.desc}</p>
-        <div class="custom-row ${m.custom?'':''}" id="custom-${m.id}">
-          <label for="note-${m.id}">Icing colours for your Black &amp; White cookies</label>
-          <div class="chips">${COLOR_PRESETS.map(c=>`<button type="button" class="chip" onclick="addPreset('${m.id}','${c}')">${c}</button>`).join('')}</div>
-          <input type="text" id="note-${m.id}" placeholder="e.g. red & gold for a birthday" oninput="notes['${m.id}']=this.value" value="${notes[m.id]||''}">
+        <div class="sizes">
+          ${m.sizes.map(s=>`<button class="size-btn" onclick="addSize('${m.id}',${s.n})">${s.n>1?`×${s.n} · `:''}${money(s.p)}</button>`).join('')}
         </div>
+        ${m.custom?customBlock():''}
       </div>
-      <div style="text-align:right">
-        <div class="mi-price">${priceLabel}</div>
-        <div class="stepper">
-          <button aria-label="Remove one ${m.name}" onclick="dec('${m.id}')">−</button>
-          <span class="qty" id="qty-${m.id}">${cart[m.id]||0}</span>
-          <button aria-label="Add one ${m.name}" onclick="inc('${m.id}')">+</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-  document.querySelector('#custom-blackwhite')?.classList.toggle('show', (cart['blackwhite']||0)>0);
-  MENU.forEach(m=>{ if(m.large){ /* bundle hint under large items */ } });
+    </div>`).join('');
+  updateCustomHint();
 }
-const COOKIE_IMG={chocchip:"images/cookie-chocchip.png",birthday:"images/cookie-birthday.png",blackwhite:"images/cookie-blackwhite.png"};
+function customBlock(){
+  return `<div class="custom-row show">
+    <label>Custom icing colours <span class="custom-meta">+${money(COLOR_PRICE)} per colour · min. ${COLOR_MIN} cookies · vanilla flavour only</span></label>
+    <div class="chips">${COLOR_PRESETS.map(c=>`<button type="button" class="chip" onclick="addPreset('blackwhite','${c}')">${c}</button>`).join('')}</div>
+    <input type="text" id="note-blackwhite" placeholder="e.g. red & gold for a birthday" oninput="notes['blackwhite']=this.value" value="${notes['blackwhite']||''}">
+    <div class="colorcount">
+      <span>Number of colours</span>
+      <div class="stepper">
+        <button aria-label="Fewer colours" onclick="setColorCount(-1)">−</button>
+        <span class="qty" id="colorCountVal">${colorCount}</span>
+        <button aria-label="More colours" onclick="setColorCount(1)">+</button>
+      </div>
+    </div>
+    <p class="custom-hint" id="customHint"></p>
+  </div>`;
+}
 function cookieSVG(id){
-  if(COOKIE_IMG[id]) return `<img src="${COOKIE_IMG[id]}" alt="" style="width:100%;height:100%;object-fit:contain">`;
-  // small pack: cluster of three mixed cookies (choc chip, birthday, black & white)
-  return `<svg viewBox="0 0 100 100"><g stroke-width="2">
-    <circle cx="33" cy="41" r="25" fill="#C88A4A" stroke="#8a5a2b"/>
-    <g fill="#3A2417"><circle cx="25" cy="36" r="3.2"/><circle cx="40" cy="33" r="3"/><circle cx="43" cy="45" r="3.2"/><circle cx="27" cy="49" r="3"/><circle cx="34" cy="43" r="2.6"/></g>
-    <circle cx="67" cy="40" r="25" fill="#F3E6C6" stroke="#d9c48f"/>
-    <circle cx="67" cy="40" r="17" fill="#FBF6EC" stroke="none"/>
-    <g stroke="none"><circle cx="61" cy="35" r="1.8" fill="#C23B2B"/><circle cx="72" cy="35" r="1.8" fill="#3AA3C2"/><circle cx="67" cy="41" r="1.8" fill="#E8A93A"/><circle cx="62" cy="45" r="1.8" fill="#6BBE5B"/><circle cx="73" cy="44" r="1.8" fill="#C23B2B"/><circle cx="67" cy="32" r="1.8" fill="#3AA3C2"/></g>
-    <defs><clipPath id="sp-bw"><rect x="50" y="44" width="50" height="46"/></clipPath></defs>
-    <circle cx="50" cy="67" r="27" fill="#F3E6C6" stroke="#d9c48f"/>
-    <circle cx="50" cy="67" r="20" fill="#FBF6EC" stroke="none"/>
-    <circle cx="50" cy="67" r="20" fill="#3A2417" stroke="none" clip-path="url(#sp-bw)"/>
-  </g></svg>`;
+  if(THUMB[id]) return `<img src="${THUMB[id]}" alt="" style="width:100%;height:100%;object-fit:contain">`;
+  if(id==="donuts") return `<svg viewBox="0 0 100 100">
+    <circle cx="50" cy="54" r="37" fill="#CE9457" stroke="#8a5a2b" stroke-width="2"/>
+    <path d="M13 50 C13 30 87 30 87 50 C87 59 79 60 74 58 C70 50 60 52 57 57 C53 50 45 50 42 57 C39 52 30 50 26 58 C20 60 13 59 13 50 Z" fill="#9C5A1E"/>
+    <g fill="#F3E6C6"><circle cx="38" cy="43" r="1.6"/><circle cx="55" cy="40" r="1.6"/><circle cx="67" cy="47" r="1.6"/><circle cx="30" cy="50" r="1.6"/></g>
+    <circle cx="50" cy="54" r="12" fill="#FBF6EC" stroke="#8a5a2b" stroke-width="2"/>
+  </svg>`;
+  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#C88A4A" stroke="#8a5a2b" stroke-width="3"/></svg>`;
 }
 
-function inc(id){ cart[id]=(cart[id]||0)+1; afterChange(id); }
-function dec(id){ if(cart[id]){ cart[id]--; if(cart[id]===0) delete cart[id]; } afterChange(id); }
+function addSize(id,n){ const k=`${id}|${n}`; cart[k]=(cart[k]||0)+1; afterChange(); }
+function lineInc(k){ cart[k]=(cart[k]||0)+1; afterChange(); }
+function lineDec(k){ if(cart[k]){ cart[k]--; if(cart[k]===0) delete cart[k]; } afterChange(); }
+function setColorCount(d){ colorCount=Math.max(0,colorCount+d); const el=document.getElementById("colorCountVal"); if(el) el.textContent=colorCount; afterChange(); }
 function addPreset(id,val){
-  const input=document.getElementById("note-"+id);
-  input.value = input.value ? input.value+", "+val : val;
-  notes[id]=input.value; input.focus();
+  const i=document.getElementById("note-"+id);
+  i.value = i.value ? i.value+", "+val : val;
+  notes[id]=i.value; i.focus();
 }
-function afterChange(id){
-  document.getElementById("qty-"+id).textContent = cart[id]||0;
-  document.querySelector('#custom-blackwhite')?.classList.toggle('show',(cart['blackwhite']||0)>0);
-  renderCart();
+function afterChange(){ updateCustomHint(); renderCart(); }
+function updateCustomHint(){
+  const h=document.getElementById("customHint"); if(!h) return;
+  if(!bwEligible()){ h.innerHTML=`Add a ×6, ×12 or ×24 Black &amp; White pack to include custom colours.`; }
+  else if(colorCount>0){ h.textContent=`${colorCount} colour${colorCount>1?'s':''} · +${money(colorCharge())}`; }
+  else { h.textContent=""; }
 }
 
 /* -------- render the cart -------- */
 function renderCart(){
   const lines=document.getElementById("cartLines");
-  const ids=Object.keys(cart);
-  const has=ids.length>0;
+  const keys=Object.keys(cart);
+  const has=keys.length>0;
 
   document.getElementById("cartTotals").style.display = has?"block":"none";
   document.getElementById("fulfilBox").style.display   = has?"block":"none";
   document.getElementById("actions").style.display     = has?"block":"none";
-  if(!has){ lines.innerHTML=`<p class="cart-empty">Your box is empty. Add some cookies!</p>`; document.getElementById("payBox").classList.remove("show"); return; }
+  if(!has){ lines.innerHTML=`<p class="cart-empty">Your box is empty. Add something tasty!</p>`; document.getElementById("payBox").classList.remove("show"); return; }
 
-  lines.innerHTML = ids.map(id=>{
-    const m=MENU.find(x=>x.id===id);
-    const note = (id==="blackwhite" && notes[id]) ? `<span class="cl-note">Colours: ${escapeHtml(notes[id])}</span>` : "";
-    return `<div class="cart-line"><span class="cl-name">${m.name}${note}<span class="cl-qty"> × ${cart[id]}</span></span></div>`;
+  lines.innerHTML = keys.map(k=>{
+    const a=k.split('|'), m=product(a[0]), qty=cart[k];
+    return `<div class="cart-line">
+      <span class="cl-name">${m.name} <span class="cl-size">×${a[1]}</span></span>
+      <span class="cl-right">
+        <span class="cl-price">${money(packPrice(a[0],+a[1])*qty)}</span>
+        <span class="mini-stepper"><button aria-label="Remove one" onclick="lineDec('${k}')">−</button><b>${qty}</b><button aria-label="Add one" onclick="lineInc('${k}')">+</button></span>
+      </span>
+    </div>`;
   }).join('');
+
+  if(bwEligible() && notes['blackwhite']){
+    lines.innerHTML += `<div class="cart-line cart-note"><span class="cl-note">B&amp;W colours: ${escapeHtml(notes['blackwhite'])}</span></div>`;
+  }
 
   const sub=cookiesSubtotal();
   document.getElementById("subtotal").textContent=money(sub);
+
+  const cc=colorCharge();
+  const colorRow=document.getElementById("colorRow");
+  if(cc>0){ colorRow.style.display="flex"; document.getElementById("colorVal").textContent=money(cc); }
+  else { colorRow.style.display="none"; }
 
   const dLabel=document.getElementById("deliveryLabel");
   const dVal=document.getElementById("deliveryVal");
@@ -773,13 +820,8 @@ function renderCart(){
   }
 
   const d=deliveryCost();
-  const grand = sub + (typeof d==="number"?d:0);
+  const grand = sub + cc + (typeof d==="number"?d:0);
   document.getElementById("grandTotal").innerHTML = money(grand) + (d===null?` <span class="todo">+ delivery</span>`:"");
-
-  // bundle nudge
-  const lc=largeCount();
-  const toBundle = lc%BUNDLE_QTY===0 ? 0 : BUNDLE_QTY-(lc%BUNDLE_QTY);
-  // (kept simple; could surface a hint here)
 }
 
 function setFulfil(mode){
@@ -793,9 +835,8 @@ function setFulfil(mode){
 /* -------- review + payment -------- */
 function reviewOrder(){
   const box=document.getElementById("payBox");
-  const sub=cookiesSubtotal();
   const d=deliveryCost();
-  const grand=sub+(typeof d==="number"?d:0);
+  const grand=cookiesSubtotal()+colorCharge()+(typeof d==="number"?d:0);
   document.getElementById("ppId").innerHTML = isTodo(CONFIG.promptPayId)
       ? `<span class="todo">${CONFIG.promptPayId}</span>` : CONFIG.promptPayId;
   document.getElementById("payTotal").innerHTML = money(grand)+(d===null?` <span class="todo">+ delivery</span>`:"");
@@ -806,17 +847,15 @@ function reviewOrder(){
 }
 
 function buildOrderText(){
-  const sub=cookiesSubtotal();
   const d=deliveryCost();
-  const grand=sub+(typeof d==="number"?d:0);
+  const sub=cookiesSubtotal(), cc=colorCharge();
+  const grand=sub+cc+(typeof d==="number"?d:0);
   let t="🍪 BIG T'S BAKERY — NEW ORDER\n\n";
-  Object.keys(cart).forEach(id=>{
-    const m=MENU.find(x=>x.id===id);
-    t+=`• ${m.name} × ${cart[id]}`;
-    if(id==="blackwhite" && notes[id]) t+=` (colours: ${notes[id]})`;
-    t+="\n";
-  });
-  t+=`\nCookies: ${money(sub)}`;
+  for(const k in cart){ const a=k.split('|'), m=product(a[0]);
+    t+=`• ${m.name} ×${a[1]} — ${cart[k]} pack${cart[k]>1?'s':''} = ${money(packPrice(a[0],+a[1])*cart[k])}\n`;
+  }
+  if(cc>0){ t+=`• Custom colours: ${notes['blackwhite']||''} (${colorCount} × ${money(COLOR_PRICE)}) = ${money(cc)}\n`; }
+  t+=`\nSubtotal: ${money(sub+cc)}`;
   if(fulfil==="delivery") t+=`\nDelivery: ${d===null?"TBC":(d===0?"Free":money(d))}`;
   t+=`\nTotal: ${money(grand)}${d===null?" + delivery":""}\n`;
   t+=`\nFulfilment: ${fulfil==="delivery"?"Delivery":"Pickup"}`;
