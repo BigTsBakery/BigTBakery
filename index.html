@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Big T's Bakery — Fresh. Made to Order. Made with Love.</title>
+<title>Big T's Bakery | Fresh. Made to Order. Made with Love.</title>
 <link rel="icon" type="image/png" href="images/favicon.png">
 <meta name="description" content="Big T's Bakery: fresh, made-to-order gourmet cookies and seasonal desserts. Customise your Black & White cookies. Local pickup and delivery.">
 
@@ -307,6 +307,16 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .info-block h4{color:var(--gold);font-size:1.1rem;margin-bottom:.3rem;margin-top:1.2rem}
 .info-block h4:first-child{margin-top:0}
 .info-block p{color:rgba(246,236,214,.9)}
+.email-link{color:var(--gold);font-weight:700;text-decoration:underline;text-decoration-color:rgba(232,169,58,.4);word-break:break-word}
+.email-pill{
+  display:inline-flex;align-items:center;gap:.4rem;max-width:100%;
+  background:rgba(246,236,214,.12);border:1.5px solid rgba(232,169,58,.4);
+  color:var(--gold);font-weight:700;font-size:.92rem;
+  padding:.55rem 1rem;border-radius:999px;
+  text-decoration:none;overflow-wrap:anywhere;line-height:1.3;
+}
+.email-pill:hover{background:var(--gold);color:var(--choc);border-color:var(--gold)}
+.email-link:hover{color:var(--cream)}
 .socials{display:flex;gap:12px;margin-top:16px}
 .line-order{display:flex;gap:16px;align-items:center;margin-top:20px;background:rgba(246,236,214,.1);border:2px solid rgba(232,169,58,.35);border-radius:14px;padding:16px}
 .line-order img{width:110px;height:110px;border-radius:10px;background:#fff;padding:6px;flex:none}
@@ -362,6 +372,17 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
   *{transition:none!important;scroll-behavior:auto!important;animation:none!important}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Big T's Bakery",
+  "url": "https://bigtsbakery.com",
+  "email": "contact@bigtsbakery.com",
+  "logo": "https://bigtsbakery.com/images/logo.png",
+  "slogan": "Fresh. Made to Order. Made with Love."
+}
+</script>
 </head>
 <body>
 
@@ -592,6 +613,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
         <p id="cInfoPickup"></p>
         <h4 data-i18n="info_allergen_h4">Allergens</h4>
         <p id="cInfoAllergen"></p>
+        <h4 data-i18n="info_email_h4">Email</h4>
+        <p id="cInfoEmail"></p>
         <div class="line-order" id="lineOrder"></div>
         <div class="socials" id="socialRow"></div>
       </div>
@@ -614,6 +637,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
     </div>
     <p class="fslogan">T-T-T-T'Soot! ♥</p>
     <p data-i18n="footer_sub">Fresh. Made to order. Made with love.</p>
+    <p id="footerEmail"></p>
     <small>© <span id="year"></span> <span data-i18n="footer_copy">Big T's Bakery. Support local, support young entrepreneurs.</span></small>
   </div>
 </footer>
@@ -634,14 +658,15 @@ const CONFIG = {
   lineOrderUrl:     "https://lin.ee/5Dtfp3k",   // where orders are sent
   lineDisplay:      "",            // optional @id to show next to the LINE button
   lineQR:           "images/line-qr.jpg",       // scannable LINE code shown in Contact
-  instagramUrl:     "",            // e.g. "https://instagram.com/bigtsbakery"
+  instagramUrl:     "https://instagram.com/bigtsbakery",
+  contactEmail:     "contact@bigtsbakery.com",
 
   deliveryFee:      null,          // e.g. 40  (in ฿). null = shows "TBC"
   freeDeliveryOver: null,          // e.g. 300 (in ฿). null = no free-delivery rule
   deliveryArea:     "TODO — list the areas/districts you deliver to",
   deliveryArea_th:  "TODO — เพิ่มพื้นที่จัดส่ง (ภาษาไทย)",
-  pickupAddress:    "TODO — add pickup address",
-  pickupAddress_th: "TODO — เพิ่มที่อยู่รับสินค้า (ภาษาไทย)",
+  pickupAddress:    "TBD",
+  pickupAddress_th: "จะแจ้งให้ทราบเร็วๆ นี้",
 
   orderDays:        "Monday to Friday",
   orderDays_th:     "จันทร์ถึงศุกร์",
@@ -936,6 +961,9 @@ function renderContact(){
   document.getElementById("cInfoDays").innerHTML = I18N[lang].cInfoDays(cfg('orderDays'),cfg('fulfilDays'));
   document.getElementById("cInfoPickup").innerHTML = td(cfg('pickupAddress'));
   document.getElementById("cInfoAllergen").innerHTML = cfg('allergenNote');
+  const em = CONFIG.contactEmail;
+  document.getElementById("cInfoEmail").innerHTML = em
+    ? `<a href="mailto:${em}" class="email-pill">✉ ${em}</a>` : `<span class="todo">Add contact email in CONFIG</span>`;
   document.getElementById("faqLead").innerHTML = td(cfg('leadTime'));
   const feeStr = CONFIG.deliveryFee===null ? `<span class="todo">${I18N[lang].delivery_tbc}</span>`
     : I18N[lang].delivery_fee(money(CONFIG.deliveryFee), CONFIG.freeDeliveryOver?money(CONFIG.freeDeliveryOver):null);
@@ -955,9 +983,13 @@ function renderContact(){
 
   const social=document.getElementById("socialRow");
   let s="";
+  if(em) s+=`<a class="social-btn" href="mailto:${em}">✉ ${I18N[lang].email_btn}</a>`;
   if(CONFIG.instagramUrl) s+=`<a class="social-btn" href="${CONFIG.instagramUrl}" target="_blank" rel="noopener">Instagram</a>`;
-  if(!s) s=`<span class="todo">Add your Instagram link in CONFIG</span>`;
+  if(!CONFIG.instagramUrl) s+=`<span class="todo">Add your Instagram link in CONFIG</span>`;
   social.innerHTML=s;
+
+  const fe=document.getElementById("footerEmail");
+  if(fe) fe.innerHTML = em ? `<a href="mailto:${em}" class="email-link">${em}</a>` : '';
 }
 
 function toggleNav(btn){
@@ -1024,7 +1056,7 @@ const I18N = {
     story_p2:"As a collective of young entrepreneurs, we use baking to grow real business skills, express our creativity, and connect with our community. Every cookie is made fresh to order.",
     story_p3:"Every purchase helps a local, independent business built on quality, creativity, and community first.",
     contact_eyebrow:"Say hello", contact_h2:"Contact & FAQ",
-    info_orderfulfil_h4:"Order & fulfilment", info_pickup_h4:"Pickup", info_allergen_h4:"Allergens",
+    info_orderfulfil_h4:"Order & fulfilment", info_pickup_h4:"Pickup", info_allergen_h4:"Allergens", info_email_h4:"Email",
     faq_q1:"How far ahead do I need to order?",
     faq_q2:"Can I customise my cookies?",
     faq_a2:"Yes! Our Black & White cookies come with custom icing colours for birthdays, holidays, school events, sports teams, or any occasion. Just add your colours when you order.",
@@ -1036,7 +1068,7 @@ const I18N = {
     delivery_fee:(fee,free)=>`a ${fee} delivery fee${free?`, free over ${free}`:''}`,
     faq_delivery_ans:(area,fee)=>`We deliver locally: ${area}. Pickup is free; delivery has ${fee}.`,
     lineorder_h4:"Order on LINE", lineorder_p:"Scan the code or tap below to message us your order and send your PromptPay slip.",
-    lineorder_btn:"Open LINE",
+    lineorder_btn:"Open LINE", email_btn:"Email us",
     footer_sub:"Fresh. Made to order. Made with love.",
     footer_copy:"Big T's Bakery. Support local, support young entrepreneurs.",
     toast_copied:"Order copied — paste it to us on LINE ♥",
@@ -1093,7 +1125,7 @@ const I18N = {
     story_p2:"ในฐานะกลุ่มผู้ประกอบการรุ่นใหม่ เราใช้การทำขนมเพื่อฝึกทักษะธุรกิจจริง แสดงออกถึงความคิดสร้างสรรค์ และเชื่อมโยงกับชุมชนของเรา คุกกี้ทุกชิ้นอบสดใหม่ตามสั่ง",
     story_p3:"ทุกการสั่งซื้อช่วยสนับสนุนธุรกิจท้องถิ่นอิสระที่ให้ความสำคัญกับคุณภาพ ความคิดสร้างสรรค์ และชุมชนเป็นอันดับแรก",
     contact_eyebrow:"ทักทายเรา", contact_h2:"ติดต่อเรา &amp; คำถามที่พบบ่อย",
-    info_orderfulfil_h4:"การสั่งซื้อและส่งมอบ", info_pickup_h4:"จุดรับสินค้า", info_allergen_h4:"สารก่อภูมิแพ้",
+    info_orderfulfil_h4:"การสั่งซื้อและส่งมอบ", info_pickup_h4:"จุดรับสินค้า", info_allergen_h4:"สารก่อภูมิแพ้", info_email_h4:"อีเมล",
     faq_q1:"ต้องสั่งล่วงหน้ากี่วัน?",
     faq_q2:"ปรับแต่งคุกกี้เองได้ไหม?",
     faq_a2:"ได้แน่นอน! คุกกี้แบล็ค แอนด์ ไวท์ ของเราปรับสีไอซิ่งได้ตามใจ เหมาะสำหรับวันเกิด เทศกาล กิจกรรมโรงเรียน ทีมกีฬา หรือโอกาสพิเศษต่างๆ แค่ระบุสีที่ต้องการตอนสั่งซื้อ",
@@ -1105,7 +1137,7 @@ const I18N = {
     delivery_fee:(fee,free)=>`ค่าจัดส่ง ${fee}${free?` ฟรีเมื่อสั่งครบ ${free}`:''}`,
     faq_delivery_ans:(area,fee)=>`เราจัดส่งในพื้นที่: ${area} รับเองไม่มีค่าใช้จ่าย ส่วนค่าจัดส่งคือ ${fee}`,
     lineorder_h4:"สั่งซื้อทาง LINE", lineorder_p:"สแกนคิวอาร์โค้ดหรือแตะด้านล่างเพื่อส่งออเดอร์และสลิปพร้อมเพย์ให้เรา",
-    lineorder_btn:"เปิด LINE",
+    lineorder_btn:"เปิด LINE", email_btn:"อีเมลหาเรา",
     footer_sub:"สดใหม่ ทำตามสั่ง ทำด้วยความรัก",
     footer_copy:"Big T's Bakery สนับสนุนธุรกิจท้องถิ่น สนับสนุนผู้ประกอบการรุ่นใหม่",
     toast_copied:"คัดลอกออเดอร์แล้ว — วางส่งให้เราทาง LINE ได้เลย ♥",
