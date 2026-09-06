@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Big T's Bakery | Fresh. Made to Order. Made with Love.</title>
 <link rel="icon" type="image/png" href="images/favicon.png">
-<meta name="description" content="Big T's Bakery: fresh, made-to-order gourmet cookies and seasonal desserts. Customise your Black & White cookies. Local pickup and delivery.">
+<meta name="description" content="Big T's Bakery: fresh, made-to-order gourmet cookies and seasonal desserts. Custom icing colours on Black & White cookies. Delivery available in Bangkok.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,7 +111,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .hero{
   position:relative;overflow:hidden;
   background:
-    radial-gradient(120% 90% at 78% 8%, rgba(232,169,58,.34), transparent 55%),
+    radial-gradient(120% 90% at 78% 8%, rgba(232,169,58,.20), transparent 55%),
     radial-gradient(100% 80% at 12% 100%, rgba(194,59,43,.22), transparent 60%),
     linear-gradient(160deg,var(--choc-2),var(--choc));
   color:var(--cream);
@@ -133,7 +133,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .hero-slogan .heart{color:var(--berry)}
 
 .cookie-stack{position:relative;height:340px;display:flex;align-items:center;justify-content:center}
-.hero-logo{width:auto;max-width:100%;max-height:340px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.45))}
+.hero-logo{width:auto;max-width:100%;max-height:340px;filter:drop-shadow(0 14px 22px rgba(0,0,0,.28))}
 
 /* wave divider */
 .wave{display:block;width:100%;height:60px;margin-top:-60px;position:relative;z-index:2}
@@ -152,13 +152,18 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 
 /* ============================================================ SIGNATURE COOKIES */
 .sig{background:var(--cream)}
-.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:24px}
 .sig-card{
   background:var(--milk);border:2px solid var(--line);border-radius:var(--radius);
   padding:26px 24px 28px;text-align:center;transition:transform .18s ease, box-shadow .18s ease;
 }
-.sig-card:hover{transform:translateY(-5px);box-shadow:0 16px 30px var(--shadow)}
-.sig-card .thumb{width:120px;height:120px;margin:0 auto 14px}
+.sig-card.featured{background:var(--choc);border-color:var(--gold-deep)}
+.sig-card.featured h3,.sig-card.featured p{color:var(--cream)}
+.sig-card.featured .tag{background:rgba(232,169,58,.22);color:var(--gold)}
+.sig-card.featured .thumb{filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
+.sig-card:hover{transform:translateY(-3px);box-shadow:0 10px 20px var(--shadow)}
+.sig-card .thumb{width:120px;height:120px;margin:0 auto 14px;background:var(--line);border-radius:50%}
+.mi-thumb{background:var(--line);border-radius:8px}
 .sig-card h3{font-size:1.5rem;margin-bottom:.35rem}
 .sig-card.birthday h3{color:var(--berry)}
 .sig-card p{color:var(--brown);font-size:.98rem;min-height:3em}
@@ -199,6 +204,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
   background:var(--cream);border:1.5px solid var(--line);color:var(--brown);
 }
 .chip:hover{border-color:var(--gold);color:var(--choc)}
+.chip-color{display:flex;align-items:center;gap:5px}
+.color-dot{width:13px;height:13px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
 .custom-row input{
   width:100%;box-sizing:border-box;padding:.6rem .8rem;
   border:2px solid var(--line);border-radius:12px;
@@ -206,7 +213,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
   font-family:var(--font-body);font-size:.9rem;
 }
 .custom-row input::placeholder{color:var(--brown);opacity:.7}
-.custom-row input:focus{outline:none;border-color:var(--gold);background:#fff}
+.custom-row input:focus{outline:none;border-color:var(--gold);background:var(--milk)}
 .sizes{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
 .size-btn{font-family:var(--font-display);font-weight:700;font-size:.85rem;color:var(--choc);background:var(--cream);border:2px solid var(--line);border-radius:10px;padding:.4rem .7rem;transition:transform .15s ease,border-color .15s ease,background .15s ease}
 .size-btn:hover{border-color:var(--gold);background:#fff;transform:translateY(-1px)}
@@ -254,9 +261,12 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .field label{display:block;font-weight:700;font-size:.85rem;margin-bottom:5px}
 .field input,.field textarea,.field select{
   width:100%;padding:.6rem .7rem;border:2px solid var(--line);border-radius:10px;
-  font-family:var(--font-body);font-size:.95rem;background:#fff;color:var(--ink);
+  font-family:var(--font-body);font-size:.95rem;background:var(--milk);color:var(--ink);
 }
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);outline:none}
+.field input.err,.field textarea.err{border-color:var(--berry)}
+.field-err{font-size:.75rem;color:var(--berry);font-weight:600;margin-top:3px;display:none}
+.field-err.show{display:block}
 .hint{font-size:.78rem;color:var(--brown);margin-top:4px}
 .ticket-actions{margin-top:16px;display:flex;flex-direction:column;gap:10px}
 .ticket-actions .btn{justify-content:center;width:100%}
@@ -267,7 +277,34 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
 .pay h4{font-size:1.05rem;margin-bottom:6px}
 .pay p{font-size:.88rem;color:var(--brown)}
 .pay .pp-id{font-family:var(--font-display);font-weight:800;color:var(--choc);font-size:1.1rem;margin:6px 0}
-.pay .qr{width:150px;height:150px;margin:10px auto;border:2px solid var(--line);border-radius:10px;display:grid;place-items:center;background:#fff;color:var(--brown);font-size:.75rem;text-align:center;padding:8px}
+.pay .qr{width:150px;height:150px;margin:10px auto;border:2px solid var(--line);border-radius:10px;display:grid;place-items:center;background:var(--milk);color:var(--brown);font-size:.75rem;text-align:center;padding:8px}
+
+/* file upload */
+.slip-upload{margin-top:12px}
+.slip-upload label{display:block;font-weight:700;font-size:.85rem;margin-bottom:5px}
+.slip-upload input[type=file]{width:100%;font-size:.88rem;padding:.5rem .6rem;border:2px dashed var(--line);border-radius:10px;background:var(--cream);cursor:pointer}
+.slip-upload input[type=file]:hover{border-color:var(--gold)}
+.slip-preview img{max-width:100%;max-height:120px;border-radius:8px;margin-top:8px;display:block}
+
+/* legal modals */
+.legal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.legal-overlay.open{display:flex}
+.legal-modal{background:var(--milk);border-radius:var(--radius);max-width:720px;width:100%;padding:32px;position:relative;margin:auto}
+.legal-modal h2{font-size:1.6rem;margin-bottom:.3rem}
+.legal-modal .lm-date{font-size:.78rem;color:var(--brown);margin-bottom:1.2rem;display:block}
+.legal-modal h3{font-size:1.05rem;margin:1.2rem 0 .3rem;color:var(--choc)}
+.legal-modal p,.legal-modal li{font-size:.93rem;color:var(--ink);line-height:1.65;margin-bottom:.4rem}
+.legal-modal ul{padding-left:1.2rem;margin-bottom:.6rem}
+.legal-close{position:absolute;top:16px;right:18px;background:transparent;font-size:1.4rem;color:var(--brown);line-height:1}
+.legal-close:hover{color:var(--choc)}
+.email-link{color:var(--gold-deep);text-decoration:underline}
+.email-link:hover{color:var(--choc)}
+.legal-modal code{background:var(--line);padding:1px 5px;border-radius:3px;font-size:.88em}
+
+/* footer legal links */
+.footer-legal{display:flex;justify-content:center;gap:16px;margin-top:10px;flex-wrap:wrap}
+.footer-legal button{background:transparent;color:rgba(246,236,214,.55);font-size:.82rem;text-decoration:underline;text-underline-offset:2px;font-family:var(--font-body)}
+.footer-legal button:hover{color:var(--gold)}
 
 /* ============================================================ SEASONAL */
 .seasonal{background:var(--choc);color:var(--cream)}
@@ -461,7 +498,7 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
         <p data-i18n="sig_bday_desc">Soft, sweet, and packed with sprinkles for every celebration.</p>
         <span class="tag" data-i18n="sig_tag_year">Year-round</span>
       </div>
-      <div class="sig-card">
+      <div class="sig-card featured">
         <img class="thumb" src="images/cookie-blackwhite.png" alt="Black and white iced cookie">
         <h3 data-i18n="sig_bw_name">Black &amp; White</h3>
         <p data-i18n="sig_bw_desc">A timeless favourite. Now with custom icing colours, just for you.</p>
@@ -503,8 +540,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
           <div class="fulfil" id="fulfilBox" style="display:none">
             <h4 data-i18n="fulfil_h4">How would you like it?</h4>
             <div class="seg" role="tablist">
-              <button id="segPickup" class="active" onclick="setFulfil('pickup')" data-i18n="seg_pickup">Pickup</button>
-              <button id="segDelivery" onclick="setFulfil('delivery')" data-i18n="seg_delivery">Delivery</button>
+              <button id="segPickup" disabled style="opacity:.4;cursor:not-allowed" data-i18n="seg_pickup_soon">Pickup — coming soon</button>
+              <button id="segDelivery" class="active" onclick="setFulfil('delivery')" data-i18n="seg_delivery">Delivery</button>
             </div>
 
             <div class="field">
@@ -514,15 +551,23 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
             </div>
             <div class="field">
               <label for="fName" data-i18n="field_name_label">Your name</label>
-              <input type="text" id="fName" placeholder="Name for the order" data-i18n-placeholder="field_name_ph">
+              <input type="text" id="fName" placeholder="Name for the order" data-i18n-placeholder="field_name_ph" onblur="liveValidate('fName')">
+              <span class="field-err" id="fNameErr" data-i18n="err_name">Please enter your name</span>
             </div>
             <div class="field">
               <label for="fPhone" data-i18n="field_phone_label">Phone or LINE ID</label>
-              <input type="text" id="fPhone" placeholder="So we can confirm your order" data-i18n-placeholder="field_phone_ph">
+              <input type="text" id="fPhone" placeholder="So we can confirm your order" data-i18n-placeholder="field_phone_ph" onblur="liveValidate('fPhone')">
+              <span class="field-err" id="fPhoneErr" data-i18n="err_phone">Enter a Thai phone number (e.g. 097-140-8366) or LINE ID</span>
+            </div>
+            <div class="field">
+              <label for="fEmail" data-i18n="field_email_label">Email (optional)</label>
+              <input type="email" id="fEmail" placeholder="For order confirmation email" data-i18n-placeholder="field_email_ph" onblur="liveValidate('fEmail')">
+              <span class="field-err" id="fEmailErr" data-i18n="err_email">Please enter a valid email address</span>
             </div>
             <div class="field" id="addrField" style="display:none">
               <label for="fAddr" data-i18n="field_addr_label">Delivery address</label>
-              <textarea id="fAddr" rows="2" placeholder="Where should we deliver?" data-i18n-placeholder="field_addr_ph"></textarea>
+              <textarea id="fAddr" rows="2" placeholder="Where should we deliver?" data-i18n-placeholder="field_addr_ph" onblur="liveValidate('fAddr')"></textarea>
+              <span class="field-err" id="fAddrErr" data-i18n="err_addr">Please enter your delivery address</span>
             </div>
             <div class="field">
               <label for="fNotes" data-i18n="field_notes_label">Notes (optional)</label>
@@ -541,6 +586,13 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
             <div class="pp-id" id="ppId"></div>
             <div class="qr" id="ppQr" data-i18n="pay_qr_placeholder">Add your PromptPay QR image here</div>
             <p><b><span data-i18n="pay_total_label">Total to send:</span> <span id="payTotal">฿0</span></b></p>
+            <div class="slip-upload">
+              <label for="fSlip" data-i18n="slip_label">Attach payment slip (optional)</label>
+              <input type="file" id="fSlip" accept="image/jpeg,image/png,image/gif,image/webp,application/pdf" onchange="validateSlip(this)">
+              <span class="field-err" id="fSlipErr"></span>
+              <p class="hint" data-i18n="slip_hint">JPG, PNG or PDF · max 5 MB</p>
+              <div id="slipPreview"></div>
+            </div>
             <div class="ticket-actions">
               <button class="btn btn-brown" onclick="copyOrder()" data-i18n="copy_btn">Copy my order</button>
               <button class="btn btn-gold" onclick="sendLine()" data-i18n="sendline_btn">Send order on LINE</button>
@@ -639,8 +691,131 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
     <p data-i18n="footer_sub">Fresh. Made to order. Made with love.</p>
     <p id="footerEmail"></p>
     <small>© <span id="year"></span> <span data-i18n="footer_copy">Big T's Bakery. Support local, support young entrepreneurs.</span></small>
+    <div class="footer-legal">
+      <button onclick="openLegal('privacy')" data-i18n="legal_privacy">Privacy Policy</button>
+      <button onclick="openLegal('terms')" data-i18n="legal_terms">Terms &amp; Conditions</button>
+      <button onclick="openLegal('accessibility')" data-i18n="legal_a11y">Accessibility</button>
+    </div>
+    <small>Built by <a href="https://hju-dev.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:rgba(246,236,214,.6);text-decoration:underline">hju-dev</a></small>
   </div>
 </footer>
+
+<!-- ==================== LEGAL MODALS ==================== -->
+<div class="legal-overlay" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="mp-h2" onclick="closeLegalOutside(event,this)">
+  <div class="legal-modal">
+    <button class="legal-close" onclick="closeLegal('privacy')" aria-label="Close">✕</button>
+    <h2 id="mp-h2">Privacy Policy</h2>
+    <span class="lm-date">Last updated: 6 September 2026</span>
+    <h3>Who we are</h3>
+    <p>Big T's Bakery is a home-based baking business in Bangkok, Thailand. Contact: <a href="mailto:contact@bigtsbakery.com" class="email-link">contact@bigtsbakery.com</a></p>
+    <h3>Data we collect</h3>
+    <p>When you place an order we collect: your name, phone number or LINE ID, email address (optional), and delivery address (if applicable). We also record your order date and contents.</p>
+    <h3>Why we collect it</h3>
+    <p>Solely to fulfil your order — to bake your cookies, confirm receipt, contact you if there is a problem, and arrange handover or delivery. Lawful basis: contract performance.</p>
+    <h3>How long we keep it</h3>
+    <p>Order records are kept for 3 years for accounting and food-safety traceability, then permanently deleted.</p>
+    <h3>Who sees your data</h3>
+    <ul>
+      <li>Our team (baker and one assistant) — for order fulfilment.</li>
+      <li>Resend.com — for sending order-confirmation emails (processor only, not a controller).</li>
+      <li>LINE — for order messaging (LINE's own privacy policy applies to their service).</li>
+    </ul>
+    <p>We do not sell, rent, or share your data with any third party for marketing.</p>
+    <h3>Payment data</h3>
+    <p>We do not store payment details. All payments are made directly via PromptPay. We never see or store your bank account or card information.</p>
+    <h3>Your rights under Thailand's PDPA</h3>
+    <p>Under the Personal Data Protection Act B.E. 2562 you have the right to: access a copy of your data; request correction of inaccurate data; request deletion (subject to our legal retention obligations); and object to processing beyond order fulfilment.</p>
+    <p>To exercise any right, email <a href="mailto:contact@bigtsbakery.com" class="email-link">contact@bigtsbakery.com</a>. We will respond within 30 days.</p>
+    <h3>Cookies &amp; tracking</h3>
+    <p>We do not use tracking cookies, analytics scripts, or advertising trackers of any kind.</p>
+    <h3>Data security</h3>
+    <p>All data is transmitted over HTTPS and stored in an encrypted database. Access is limited to authorised team members only.</p>
+    <h3>Changes</h3>
+    <p>If we make material changes we will update the date at the top of this page.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="modal-terms" role="dialog" aria-modal="true" aria-labelledby="mt-h2" onclick="closeLegalOutside(event,this)">
+  <div class="legal-modal">
+    <button class="legal-close" onclick="closeLegal('terms')" aria-label="Close">✕</button>
+    <h2 id="mt-h2">Terms &amp; Conditions</h2>
+    <span class="lm-date">Last updated: 6 September 2026</span>
+    <h3>1. About us</h3>
+    <p>Big T's Bakery is a home-based baking business operating in Bangkok, Thailand. By placing an order you agree to these terms.</p>
+    <h3>2. Orders</h3>
+    <ul>
+      <li>Orders are placed through our website and confirmed via LINE once payment is received.</li>
+      <li>We accept orders Monday to Friday. Cookies are baked and handed over Saturday or Sunday.</li>
+      <li>Orders placed after the Friday cut-off will be processed the following week.</li>
+      <li>We reserve the right to cancel any order we cannot safely fulfil. You will be notified and a full refund arranged.</li>
+    </ul>
+    <h3>3. Payment</h3>
+    <ul>
+      <li>We accept payment by PromptPay only.</li>
+      <li>Baking begins only once payment is confirmed. Please send your slip promptly.</li>
+      <li>Prices are in Thai Baht (฿) and are inclusive of any applicable taxes.</li>
+    </ul>
+    <h3>4. Delivery</h3>
+    <ul>
+      <li>We deliver within the Sukhumvit corridor (Phrom Phong, Thonglor, Ekkamai, Asok, Nana, Phloen Chit). A flat ฿60 delivery fee applies.</li>
+      <li>Delivery timings are agreed at the time of order. We are not liable for delays caused by traffic, weather, or events outside our control.</li>
+    </ul>
+    <h3>5. Cancellations &amp; refunds</h3>
+    <ul>
+      <li>Cancelled before payment confirmed: no charge.</li>
+      <li>Cancelled after payment but before baking starts: full refund.</li>
+      <li>Cancelled after baking has started: no refund (ingredients used).</li>
+      <li>Wrong or damaged order: contact us within 24 hours and we will make it right.</li>
+    </ul>
+    <h3>6. Allergens</h3>
+    <p>Our products are baked in a home kitchen that also handles <strong>nuts, dairy, eggs, and wheat</strong>. We cannot guarantee a completely allergen-free environment. It is your responsibility to check allergen information before ordering if you have a food allergy or intolerance.</p>
+    <h3>7. Food safety</h3>
+    <p>Cookies are made fresh to order. Consume within 3 days of collection and store in a cool, dry place.</p>
+    <h3>8. Photos &amp; social media</h3>
+    <p>We love when customers share photos! By tagging @bigtsbakery on social media you grant us permission to repost your content with credit.</p>
+    <h3>9. Limitation of liability</h3>
+    <p>Our total liability in connection with any order shall not exceed the value of that order. We are not liable for indirect or consequential losses.</p>
+    <h3>10. Governing law</h3>
+    <p>These terms are governed by the laws of Thailand. Any disputes shall be subject to the jurisdiction of the courts of Bangkok.</p>
+    <h3>11. Changes</h3>
+    <p>We may update these terms from time to time. Material changes will be posted here with an updated date. Continued use of our ordering service after changes constitutes acceptance.</p>
+  </div>
+</div>
+
+<div class="legal-overlay" id="modal-accessibility" role="dialog" aria-modal="true" aria-labelledby="ma-h2" onclick="closeLegalOutside(event,this)">
+  <div class="legal-modal">
+    <button class="legal-close" onclick="closeLegal('accessibility')" aria-label="Close">✕</button>
+    <h2 id="ma-h2">Accessibility Statement</h2>
+    <span class="lm-date">Last updated: 6 September 2026</span>
+    <h3>Our commitment</h3>
+    <p>Big T's Bakery is committed to ensuring our website is accessible to everyone, including people with disabilities. We aim to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA.</p>
+    <h3>What we have done</h3>
+    <ul>
+      <li>All images include descriptive <code>alt</code> text.</li>
+      <li>Colour contrast ratios meet WCAG 2.1 AA requirements throughout the site.</li>
+      <li>The site is fully navigable by keyboard. Focus indicators are visible on all interactive elements.</li>
+      <li>ARIA labels are applied to icon-only buttons and live regions (order status, toast messages).</li>
+      <li>Text resizes without loss of content or functionality up to 200%.</li>
+      <li>The order form uses explicit <code>&lt;label&gt;</code> associations with all inputs.</li>
+      <li>Language is declared in the HTML element (<code>lang="en"</code> / <code>lang="th"</code>).</li>
+      <li>Icing colour swatches are identified by name in addition to colour — usable without colour vision.</li>
+      <li>The PromptPay account number is displayed in plain text above the QR code for users who cannot scan QR codes.</li>
+    </ul>
+    <h3>Known limitations</h3>
+    <ul>
+      <li>The language toggle is currently a visual switch; screen-reader users may prefer to use their browser's built-in translation feature.</li>
+      <li>Some older mobile browsers may have reduced support for certain CSS layout features; core ordering functionality remains available in all cases.</li>
+    </ul>
+    <h3>Technical specification</h3>
+    <p>This website is built with semantic HTML5, CSS, and vanilla JavaScript. No third-party frameworks that could introduce accessibility regressions are used.</p>
+    <h3>Feedback &amp; contact</h3>
+    <p>If you experience any accessibility barriers or have suggestions for improvement, please contact us at <a href="mailto:contact@bigtsbakery.com" class="email-link">contact@bigtsbakery.com</a>. We aim to respond within 5 working days.</p>
+    <h3>Formal complaints</h3>
+    <p>If you are not satisfied with our response, you may contact the <strong>Electronic Transactions Development Agency (ETDA)</strong> of Thailand, or refer to the Rights of Persons with Disabilities Act B.E. 2550.</p>
+    <h3>Review</h3>
+    <p>This statement was prepared on 6 September 2026 and will be reviewed annually.</p>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -652,21 +827,21 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.05;color:var(--choc);f
    Anything left as "TODO" shows a visible red placeholder on the site.
    ============================================================ */
 const CONFIG = {
-  promptPayId:      "TODO — add PromptPay ID (phone or national ID)",
+  promptPayId:      "097-140-8366",
   promptPayName:    "Big T's Bakery",
-  promptPayQR:      "",            // paste an image URL to the QR, or leave "" for the placeholder box
+  promptPayQR:      "images/QR%20code.jpg",
   lineOrderUrl:     "https://lin.ee/5Dtfp3k",   // where orders are sent
   lineDisplay:      "",            // optional @id to show next to the LINE button
   lineQR:           "images/line-qr.jpg",       // scannable LINE code shown in Contact
   instagramUrl:     "https://instagram.com/bigtsbakery",
   contactEmail:     "contact@bigtsbakery.com",
 
-  deliveryFee:      null,          // e.g. 40  (in ฿). null = shows "TBC"
-  freeDeliveryOver: null,          // e.g. 300 (in ฿). null = no free-delivery rule
-  deliveryArea:     "TODO — list the areas/districts you deliver to",
-  deliveryArea_th:  "TODO — เพิ่มพื้นที่จัดส่ง (ภาษาไทย)",
-  pickupAddress:    "TBD",
-  pickupAddress_th: "จะแจ้งให้ทราบเร็วๆ นี้",
+  deliveryFee:      60,
+  freeDeliveryOver: null,
+  deliveryArea:     "Sukhumvit area (Phrom Phong, Thonglor, Ekkamai, Asok, Nana, Phloen Chit)",
+  deliveryArea_th:  "แถวสุขุมวิท (พร้อมพงษ์ ทองหล่อ เอกมัย อโศก นานา เพลินจิต)",
+  pickupAddress:    "Coming soon — watch this space!",
+  pickupAddress_th: "เร็วๆ นี้ — คอยติดตาม!",
 
   orderDays:        "Monday to Friday",
   orderDays_th:     "จันทร์ถึงศุกร์",
@@ -732,8 +907,15 @@ const SEASONAL = [
   { id:"applecrisp",name:"Apple Crisp",     name_th:"แอปเปิ้ลคริสป์",     price:350 }
 ];
 
-const COLOR_PRESETS = ["Birthday","Sports team","Holiday","Pastel","School colours"];
-const COLOR_PRESETS_TH = ["วันเกิด","ทีมกีฬา","เทศกาล","สีพาสเทล","สีโรงเรียน"];
+const COLORS = [
+  {name:"Apple Green",   name_th:"เขียวแอปเปิ้ล", hex:"#5CAB4A"},
+  {name:"Orchid Violet", name_th:"ม่วงกล้วยไม้",  hex:"#DA70D6"},
+  {name:"Lemon Yellow",  name_th:"เหลืองมะนาว",   hex:"#FFE44D"},
+  {name:"Sky Blue",      name_th:"ฟ้าท้องฟ้า",    hex:"#87CEEB"},
+  {name:"Red",           name_th:"แดง",            hex:"#E53935"},
+  {name:"Indigo",        name_th:"คราม",           hex:"#3F51B5"},
+  {name:"Violet",        name_th:"ม่วงไวโอเล็ต",  hex:"#8B00FF"},
+];
 
 /* ============================================================
    STATE + LOGIC  (below here you usually don't need to edit)
@@ -741,7 +923,7 @@ const COLOR_PRESETS_TH = ["วันเกิด","ทีมกีฬา","เ�
 const cart = {};            // "id|n" -> number of packs
 const notes = {};           // id -> custom colour text
 let colorCount = 0;         // Black & White custom colours
-let fulfil = "pickup";
+let fulfil = "delivery";
 let lang = "en";
 
 const money = n => "฿" + Number(n).toLocaleString("en-US");
@@ -782,10 +964,10 @@ function renderMenu(){
   updateCustomHint();
 }
 function customBlock(){
-  const presets = lang==="th" ? COLOR_PRESETS_TH : COLOR_PRESETS;
   return `<div class="custom-row show">
     <label>${I18N[lang].custom_label} <span class="custom-meta">${I18N[lang].custom_meta(COLOR_PRICE,COLOR_MIN)}</span></label>
-    <div class="chips">${presets.map((c,i)=>`<button type="button" class="chip" onclick="addPreset('blackwhite','${c}')">${c}</button>`).join('')}</div>
+    <div class="chips">${COLORS.map(c=>`<button type="button" class="chip chip-color" onclick="addPreset('blackwhite','${lang==='th'?c.name_th:c.name}')"><span class="color-dot" style="background:${c.hex}"></span>${lang==='th'?c.name_th:c.name}</button>`).join('')}</div>
+    <p style="font-size:.76rem;color:var(--gold-deep);font-weight:700;margin:0 0 8px">${I18N[lang].multi_color_vanilla}</p>
     <input type="text" id="note-blackwhite" placeholder="${I18N[lang].custom_ph}" oninput="notes['blackwhite']=this.value" value="${notes['blackwhite']||''}">
     <div class="colorcount">
       <span>${I18N[lang].colorcount_label}</span>
@@ -835,6 +1017,7 @@ function renderCart(){
   document.getElementById("cartTotals").style.display = has?"block":"none";
   document.getElementById("fulfilBox").style.display   = has?"block":"none";
   document.getElementById("actions").style.display     = has?"block":"none";
+  if(has) document.getElementById("addrField").style.display = fulfil==="delivery"?"block":"none";
   if(!has){ lines.innerHTML=`<p class="cart-empty">${I18N[lang].cart_empty}</p>`; document.getElementById("payBox").classList.remove("show"); return; }
 
   lines.innerHTML = keys.map(k=>{
@@ -885,8 +1068,137 @@ function setFulfil(mode){
   renderCart();
 }
 
+/* -------- validation -------- */
+function isValidPhone(val){
+  const d = val.replace(/[\s\-]/g,'');
+  return /^(0\d{9}|\+?66\d{9})$/.test(d);
+}
+function isValidLineId(val){
+  return /^[a-zA-Z0-9._\-]{4,20}$/.test(val);
+}
+function isValidEmail(val){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val);
+}
+function setFieldErr(id, errId, fail){
+  const el = document.getElementById(id);
+  const err = document.getElementById(errId);
+  if(!el) return !fail;
+  el.classList.toggle('err', fail);
+  if(err) err.classList.toggle('show', fail);
+  return !fail;
+}
+function liveValidate(fieldId){
+  if(fieldId === 'fName'){
+    const v = document.getElementById('fName').value.trim();
+    setFieldErr('fName','fNameErr', v.length < 1);
+  }
+  if(fieldId === 'fPhone'){
+    const v = document.getElementById('fPhone').value.trim();
+    if(v) setFieldErr('fPhone','fPhoneErr', !isValidPhone(v) && !isValidLineId(v));
+    else setFieldErr('fPhone','fPhoneErr', false);
+  }
+  if(fieldId === 'fEmail'){
+    const v = document.getElementById('fEmail').value.trim();
+    if(v) setFieldErr('fEmail','fEmailErr', !isValidEmail(v));
+    else setFieldErr('fEmail','fEmailErr', false);
+  }
+  if(fieldId === 'fAddr'){
+    const v = document.getElementById('fAddr').value.trim();
+    setFieldErr('fAddr','fAddrErr', v.length < 5);
+  }
+}
+function validateForm(){
+  let ok = true;
+  const name = document.getElementById('fName').value.trim();
+  if(!setFieldErr('fName','fNameErr', name.length < 1)) ok = false;
+
+  const phone = document.getElementById('fPhone').value.trim();
+  if(!phone || (!isValidPhone(phone) && !isValidLineId(phone))){
+    setFieldErr('fPhone','fPhoneErr', true); ok = false;
+  } else { setFieldErr('fPhone','fPhoneErr', false); }
+
+  const email = document.getElementById('fEmail').value.trim();
+  if(email && !isValidEmail(email)){
+    setFieldErr('fEmail','fEmailErr', true); ok = false;
+  } else { setFieldErr('fEmail','fEmailErr', false); }
+
+  if(fulfil === 'delivery'){
+    const addr = document.getElementById('fAddr').value.trim();
+    if(!setFieldErr('fAddr','fAddrErr', addr.length < 5)) ok = false;
+  }
+  return ok;
+}
+
+/* -------- file upload validation -------- */
+const SLIP_ALLOWED_TYPES = ['image/jpeg','image/png','image/gif','image/webp','application/pdf'];
+const SLIP_BLOCKED_EXT   = /\.(php|jsp|js|html?|exe|sh|py|rb|pl|cgi|asp|aspx|bat|cmd)$/i;
+const SLIP_MAX_BYTES     = 5 * 1024 * 1024;
+
+function validateSlip(input){
+  const errEl = document.getElementById('fSlipErr');
+  const preview = document.getElementById('slipPreview');
+  errEl.textContent = '';
+  errEl.classList.remove('show');
+  if(preview){ preview.innerHTML = ''; }
+  if(!input.files || !input.files[0]) return true;
+  const file = input.files[0];
+  const name = file.name || '';
+  if(SLIP_BLOCKED_EXT.test(name) || !SLIP_ALLOWED_TYPES.includes(file.type)){
+    errEl.textContent = I18N[lang].slip_err_type;
+    errEl.classList.add('show');
+    input.value = '';
+    return false;
+  }
+  if(file.size > SLIP_MAX_BYTES){
+    errEl.textContent = I18N[lang].slip_err_size;
+    errEl.classList.add('show');
+    input.value = '';
+    return false;
+  }
+  if(preview && file.type.startsWith('image/')){
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.alt = 'Payment slip preview';
+      img.style.cssText = 'max-width:180px;max-height:140px;border-radius:8px;border:1px solid var(--line);margin-top:8px';
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+  return true;
+}
+
+/* -------- legal modals -------- */
+function openLegal(which){
+  const el = document.getElementById('modal-' + which);
+  if(!el) return;
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  el.querySelector('.legal-close')?.focus();
+}
+function closeLegal(which){
+  const el = document.getElementById('modal-' + which);
+  if(!el) return;
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLegalOutside(e, overlay){
+  if(e.target === overlay) closeLegal(overlay.id.replace('modal-',''));
+}
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.legal-overlay.open').forEach(el => el.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+});
+
 /* -------- review + payment -------- */
 function reviewOrder(){
+  if(!validateForm()){
+    document.querySelector('.field input.err, .field textarea.err')?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
   const box=document.getElementById("payBox");
   const d=deliveryCost();
   const grand=cookiesSubtotal()+colorCharge()+(typeof d==="number"?d:0);
@@ -928,7 +1240,45 @@ function copyOrder(){
     .then(()=>showToast(I18N[lang].toast_copied))
     .catch(()=>showToast(I18N[lang].toast_copyfail));
 }
+// Update this to your Vercel deployment URL before going live
+const ORDER_API_URL = 'https://bigtsbakery-orders.vercel.app/api/orders';
+
 function sendLine(){
+  // Fire-and-forget: submit order to backend. Never blocks or replaces the LINE flow.
+  try {
+    const d = deliveryCost();
+    const sub = cookiesSubtotal(), cc = colorCharge();
+    const grand = sub + cc + (typeof d === 'number' ? d : 0);
+    const v = id => { const el = document.getElementById(id); return el?.value?.trim() || null; };
+    const items = Object.entries(cart).map(([k, qty]) => {
+      const [id, n] = k.split('|');
+      const m = product(id);
+      const packSizeN = parseInt(n, 10);
+      const unitPrice = packPrice(id, packSizeN);
+      return { product_id: id, product_name: tField(m, 'name'), pack_size: `×${packSizeN}`,
+               qty, unit_price: unitPrice, line_total: unitPrice * qty };
+    });
+    fetch(ORDER_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        language: lang,
+        fulfillment_type: fulfil,
+        fulfillment_date: v('fDate'),
+        customer_name: v('fName') || '',
+        customer_phone_or_line: v('fPhone') || '',
+        customer_email: v('fEmail'),
+        delivery_address: v('fAddr'),
+        notes: v('fNotes'),
+        items,
+        color_notes: notes['blackwhite'] || null,
+        color_charge: cc,
+        subtotal: sub,
+        delivery_fee: typeof d === 'number' ? d : null,
+        total: grand
+      })
+    }).catch(e => console.warn('[BigT API]', e));
+  } catch(e) { console.warn('[BigT API]', e); }
   copyOrder();
   if(CONFIG.lineOrderUrl){ window.open(CONFIG.lineOrderUrl,"_blank"); }
   else { showToast(I18N[lang].toast_addline); }
@@ -1027,7 +1377,7 @@ const I18N = {
     ticket_title:"Your order", cart_empty:"Your box is empty. Add something tasty!",
     cart_cookies:"Cookies", cart_colors:"Custom colours", cart_total:"Total", cart_pickup_lbl:"Pickup",
     cart_colors_note:"B&W colours", free:"Free",
-    fulfil_h4:"How would you like it?", seg_pickup:"Pickup", seg_delivery:"Delivery",
+    fulfil_h4:"How would you like it?", seg_pickup:"Pickup", seg_pickup_soon:"Pickup — coming soon", seg_delivery:"Delivery",
     field_date_label:"Weekend date (Sat or Sun)", field_date_hint:"Orders taken Mon–Fri, handed over Sat–Sun.",
     field_name_label:"Your name", field_name_ph:"Name for the order",
     field_phone_label:"Phone or LINE ID", field_phone_ph:"So we can confirm your order",
@@ -1040,7 +1390,8 @@ const I18N = {
     pay_total_label:"Total to send:", copy_btn:"Copy my order", sendline_btn:"Send order on LINE",
     pay_hint:"Copy your order, message us on LINE, paste it, and attach your transfer slip.",
     custom_label:"Custom icing colours",
-    custom_meta:(price,min)=>`+${money(price)} per colour · min. ${min} cookies · vanilla flavour only`,
+    custom_meta:(price,min)=>`+${money(price)} per colour · min. ${min} cookies`,
+    multi_color_vanilla:"Multiple colours? Your cookies come in vanilla flavour only.",
     custom_ph:"e.g. red & gold for a birthday", colorcount_label:"Number of colours",
     custom_hint_locked:"Add a ×6, ×12 or ×24 Black &amp; White pack to include custom colours.",
     custom_hint_active:(n,amt)=>`${n} colour${n>1?'s':''} · +${amt}`,
@@ -1056,7 +1407,7 @@ const I18N = {
     story_p2:"As a collective of young entrepreneurs, we use baking to grow real business skills, express our creativity, and connect with our community. Every cookie is made fresh to order.",
     story_p3:"Every purchase helps a local, independent business built on quality, creativity, and community first.",
     contact_eyebrow:"Say hello", contact_h2:"Contact & FAQ",
-    info_orderfulfil_h4:"Order & fulfilment", info_pickup_h4:"Pickup", info_allergen_h4:"Allergens", info_email_h4:"Email",
+    info_orderfulfil_h4:"Order & fulfilment", info_pickup_h4:"Pickup (coming soon)", info_allergen_h4:"Allergens", info_email_h4:"Email",
     faq_q1:"How far ahead do I need to order?",
     faq_q2:"Can I customise my cookies?",
     faq_a2:"Yes! Our Black & White cookies come with custom icing colours for birthdays, holidays, school events, sports teams, or any occasion. Just add your colours when you order.",
@@ -1066,7 +1417,7 @@ const I18N = {
     cInfoDays:(o,f)=>`Orders ${o}. Handed over ${f}.`,
     delivery_tbc:"delivery area and fee to be confirmed",
     delivery_fee:(fee,free)=>`a ${fee} delivery fee${free?`, free over ${free}`:''}`,
-    faq_delivery_ans:(area,fee)=>`We deliver locally: ${area}. Pickup is free; delivery has ${fee}.`,
+    faq_delivery_ans:(area,fee)=>`We deliver locally to: ${area}. Flat delivery fee: ${fee}. Pickup coming soon.`,
     lineorder_h4:"Order on LINE", lineorder_p:"Scan the code or tap below to message us your order and send your PromptPay slip.",
     lineorder_btn:"Open LINE", email_btn:"Email us",
     footer_sub:"Fresh. Made to order. Made with love.",
@@ -1076,7 +1427,19 @@ const I18N = {
     toast_addline:"Add the bakery's LINE link in CONFIG.lineOrderUrl",
     pack_word:n=>n>1?'packs':'pack', order_subtotal:"Subtotal", order_fulfilment:"Fulfilment",
     order_date:"Date", order_name:"Name", order_contact:"Contact", order_address:"Address", order_notes:"Notes",
-    order_footer:"I'll send my PromptPay slip to confirm. Thank you!"
+    order_footer:"I'll send my PromptPay slip to confirm. Thank you!",
+    field_email_label:"Email (optional)", field_email_ph:"For order confirmation email",
+    err_name:"Please enter your name",
+    err_phone:"Enter a Thai phone number (e.g. 097-140-8366) or LINE ID",
+    err_email:"Please enter a valid email address",
+    err_addr:"Please enter your delivery address",
+    slip_label:"Attach payment slip (optional)",
+    slip_hint:"JPG, PNG or PDF · max 5 MB",
+    slip_err_type:"Only JPG, PNG, GIF, WebP or PDF files are allowed",
+    slip_err_size:"File must be under 5 MB",
+    legal_privacy:"Privacy Policy",
+    legal_terms:"Terms & Conditions",
+    legal_a11y:"Accessibility"
   },
   th:{
     nav_cookies:"คุกกี้", nav_order:"สั่งซื้อ", nav_seasonal:"เมนูตามฤดูกาล", nav_story:"เรื่องราวของเรา", nav_contact:"ติดต่อเรา",
@@ -1096,7 +1459,7 @@ const I18N = {
     ticket_title:"ออเดอร์ของคุณ", cart_empty:"ยังไม่มีสินค้าในตะกร้า เลือกของอร่อยกันเลย!",
     cart_cookies:"คุกกี้", cart_colors:"สีไอซิ่งพิเศษ", cart_total:"ยอดรวม", cart_pickup_lbl:"รับเอง",
     cart_colors_note:"สี B&W", free:"ฟรี",
-    fulfil_h4:"คุณต้องการรับสินค้าแบบไหน?", seg_pickup:"รับเอง", seg_delivery:"จัดส่ง",
+    fulfil_h4:"คุณต้องการรับสินค้าแบบไหน?", seg_pickup:"รับเอง", seg_pickup_soon:"รับเอง — เร็วๆ นี้", seg_delivery:"จัดส่ง",
     field_date_label:"วันที่รับ (เสาร์หรืออาทิตย์)", field_date_hint:"สั่งได้จันทร์-ศุกร์ ส่งมอบเสาร์-อาทิตย์",
     field_name_label:"ชื่อของคุณ", field_name_ph:"ชื่อสำหรับออเดอร์นี้",
     field_phone_label:"เบอร์โทรหรือไอดีไลน์", field_phone_ph:"เพื่อใช้ยืนยันออเดอร์ของคุณ",
@@ -1109,7 +1472,8 @@ const I18N = {
     pay_total_label:"ยอดที่ต้องโอน:", copy_btn:"คัดลอกออเดอร์ของฉัน", sendline_btn:"ส่งออเดอร์ทาง LINE",
     pay_hint:"คัดลอกออเดอร์ ส่งข้อความหาเราทาง LINE วางข้อความ แล้วแนบสลิปโอนเงิน",
     custom_label:"สีไอซิ่งพิเศษ",
-    custom_meta:(price,min)=>`+${money(price)} ต่อสี · ขั้นต่ำ ${min} ชิ้น · มีเฉพาะรสวานิลลา`,
+    custom_meta:(price,min)=>`+${money(price)} ต่อสี · ขั้นต่ำ ${min} ชิ้น`,
+    multi_color_vanilla:"คุกกี้ที่มีหลายสีจะเป็นรสวานิลลาเท่านั้น",
     custom_ph:"เช่น สีแดงและทองสำหรับวันเกิด", colorcount_label:"จำนวนสี",
     custom_hint_locked:"เพิ่มแพ็ค ×6, ×12 หรือ ×24 ของแบล็ค แอนด์ ไวท์ เพื่อเลือกสีไอซิ่งพิเศษ",
     custom_hint_active:(n,amt)=>`${n} สี · +${amt}`,
@@ -1125,7 +1489,7 @@ const I18N = {
     story_p2:"ในฐานะกลุ่มผู้ประกอบการรุ่นใหม่ เราใช้การทำขนมเพื่อฝึกทักษะธุรกิจจริง แสดงออกถึงความคิดสร้างสรรค์ และเชื่อมโยงกับชุมชนของเรา คุกกี้ทุกชิ้นอบสดใหม่ตามสั่ง",
     story_p3:"ทุกการสั่งซื้อช่วยสนับสนุนธุรกิจท้องถิ่นอิสระที่ให้ความสำคัญกับคุณภาพ ความคิดสร้างสรรค์ และชุมชนเป็นอันดับแรก",
     contact_eyebrow:"ทักทายเรา", contact_h2:"ติดต่อเรา &amp; คำถามที่พบบ่อย",
-    info_orderfulfil_h4:"การสั่งซื้อและส่งมอบ", info_pickup_h4:"จุดรับสินค้า", info_allergen_h4:"สารก่อภูมิแพ้", info_email_h4:"อีเมล",
+    info_orderfulfil_h4:"การสั่งซื้อและส่งมอบ", info_pickup_h4:"รับเอง (เร็วๆ นี้)", info_allergen_h4:"สารก่อภูมิแพ้", info_email_h4:"อีเมล",
     faq_q1:"ต้องสั่งล่วงหน้ากี่วัน?",
     faq_q2:"ปรับแต่งคุกกี้เองได้ไหม?",
     faq_a2:"ได้แน่นอน! คุกกี้แบล็ค แอนด์ ไวท์ ของเราปรับสีไอซิ่งได้ตามใจ เหมาะสำหรับวันเกิด เทศกาล กิจกรรมโรงเรียน ทีมกีฬา หรือโอกาสพิเศษต่างๆ แค่ระบุสีที่ต้องการตอนสั่งซื้อ",
@@ -1135,7 +1499,7 @@ const I18N = {
     cInfoDays:(o,f)=>`สั่งได้ ${o} รับสินค้า ${f}`,
     delivery_tbc:"พื้นที่และค่าจัดส่งจะแจ้งให้ทราบเร็วๆ นี้",
     delivery_fee:(fee,free)=>`ค่าจัดส่ง ${fee}${free?` ฟรีเมื่อสั่งครบ ${free}`:''}`,
-    faq_delivery_ans:(area,fee)=>`เราจัดส่งในพื้นที่: ${area} รับเองไม่มีค่าใช้จ่าย ส่วนค่าจัดส่งคือ ${fee}`,
+    faq_delivery_ans:(area,fee)=>`เราจัดส่งในพื้นที่: ${area} ค่าจัดส่ง: ${fee} รับเองเร็วๆ นี้`,
     lineorder_h4:"สั่งซื้อทาง LINE", lineorder_p:"สแกนคิวอาร์โค้ดหรือแตะด้านล่างเพื่อส่งออเดอร์และสลิปพร้อมเพย์ให้เรา",
     lineorder_btn:"เปิด LINE", email_btn:"อีเมลหาเรา",
     footer_sub:"สดใหม่ ทำตามสั่ง ทำด้วยความรัก",
@@ -1145,7 +1509,19 @@ const I18N = {
     toast_addline:"กรุณาเพิ่มลิงก์ LINE ของร้านใน CONFIG.lineOrderUrl",
     pack_word:n=>'แพ็ค', order_subtotal:"ยอดรวมย่อย", order_fulfilment:"รูปแบบการรับสินค้า",
     order_date:"วันที่", order_name:"ชื่อ", order_contact:"ติดต่อ", order_address:"ที่อยู่", order_notes:"หมายเหตุ",
-    order_footer:"ฉันจะส่งสลิปพร้อมเพย์มายืนยันค่ะ/ครับ ขอบคุณค่ะ/ครับ!"
+    order_footer:"ฉันจะส่งสลิปพร้อมเพย์มายืนยันค่ะ/ครับ ขอบคุณค่ะ/ครับ!",
+    field_email_label:"อีเมล (ไม่บังคับ)", field_email_ph:"สำหรับอีเมลยืนยันออเดอร์",
+    err_name:"กรุณากรอกชื่อของคุณ",
+    err_phone:"กรอกเบอร์โทรไทย (เช่น 097-140-8366) หรือไอดีไลน์",
+    err_email:"กรุณากรอกอีเมลที่ถูกต้อง",
+    err_addr:"กรุณากรอกที่อยู่จัดส่ง",
+    slip_label:"แนบสลิปการชำระเงิน (ไม่บังคับ)",
+    slip_hint:"JPG, PNG หรือ PDF · ขนาดไม่เกิน 5 MB",
+    slip_err_type:"อนุญาตเฉพาะไฟล์ JPG, PNG, GIF, WebP หรือ PDF เท่านั้น",
+    slip_err_size:"ขนาดไฟล์ต้องไม่เกิน 5 MB",
+    legal_privacy:"นโยบายความเป็นส่วนตัว",
+    legal_terms:"ข้อกำหนดและเงื่อนไข",
+    legal_a11y:"การเข้าถึง"
   }
 };
 
